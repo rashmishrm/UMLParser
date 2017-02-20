@@ -1,0 +1,25 @@
+@startuml
+class classA{
+-String message
+-String bark 
+#String foo 
+#String bar 
+~String test
+    
+	
+
+   +void testMethod()
+
+}
+
+class classB{
+-String hello
+
++ String getA()
++ setA(String)
+
+}
+
+classB <|-- classA
+
+@enduml

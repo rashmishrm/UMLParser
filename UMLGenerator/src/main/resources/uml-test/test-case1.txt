@@ -1,0 +1,5 @@
+@startuml
+A "1" *-- "*" B: contains
+A "1" *-- "*" D: contains
+A "1" *-- "1" C: contains
+@enduml

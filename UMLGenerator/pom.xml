@@ -6,16 +6,18 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>UMLGenerator</name>
 
-
-
-
-
-
 	<dependencies>
 		<dependency>
 			<groupId>com.github.javaparser</groupId>
 			<artifactId>javaparser-core</artifactId>
 			<version>3.0.1</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/net.sourceforge.plantuml/plantuml -->
+		<dependency>
+			<groupId>net.sourceforge.plantuml</groupId>
+			<artifactId>plantuml</artifactId>
+			<version>8050</version>
 		</dependency>
 	</dependencies>
 </project>
