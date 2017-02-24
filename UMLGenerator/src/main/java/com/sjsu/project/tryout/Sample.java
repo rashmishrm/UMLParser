@@ -16,7 +16,7 @@ public class Sample {
 	// 2017//cmpe202//cmpe202-master//umlparser//uml-parser-test-1//A.java");
 
 	final FileInputStream in = new FileInputStream(
-		"/Users/rashmisharma/Documents/workspace/UMLGenerator/src/main/java/com/sjsu/project/tryout/TestClass.java");
+		"/Users/rashmisharma/Documents/Spring 2017/cmpe202/rashmi/UMLGenerator/src/main/java/com/sjsu/project/tryout/TestClass.java");
 
 	// parse the file
 	final CompilationUnit cu = JavaParser.parse(in);
