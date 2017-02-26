@@ -108,7 +108,7 @@ public class ListClassesExample {
 		{
 		    buffer.append(v.getSource() + "  \"" + v.getLabelSource() + "\" " + getRelationSymbol(v.getType())
 		    + "  \"" + v.getLabelDestination() + "\"  " + v.getDestination() + " : "
-		    + v.getLabelRelationship());
+		    + v.getLabelRelationship() + "\n");
 		}
 
 		);
@@ -270,7 +270,7 @@ public class ListClassesExample {
 
     public static void main(String[] args) {
 	final File projectDir = new File(
-		"/Users/rashmisharma/Documents/Spring 2017/cmpe202/rashmi/UMLGenerator/src/main/resources/umlparser/uml-parser-test-3");
+		"/Users/rashmisharma/Documents/Spring 2017/cmpe202/rashmi/UMLGenerator/src/main/resources/umlparser/uml-parser-test-4");
 	listClasses(projectDir);
     }
 }
