@@ -2,14 +2,14 @@ package com.sjsu.umlgenerator.parser;
 
 public class RelationshipInfo {
     private String type;
-    private ClassInfo source;
-    private ClassInfo destination;
+    private String source;
+    private String destination;
     private String labelSource;
     private String labelDestination;
     private String labelRelationship;
 
-    public RelationshipInfo(String type, ClassInfo source, ClassInfo destination, String labelSource,
-	    String labelDestination, String labelRelationship) {
+    public RelationshipInfo(String type, String source, String destination, String labelSource, String labelDestination,
+	    String labelRelationship) {
 	super();
 	this.type = type;
 	this.source = source;
@@ -27,19 +27,19 @@ public class RelationshipInfo {
 	this.type = type;
     }
 
-    public ClassInfo getSource() {
+    public String getSource() {
 	return source;
     }
 
-    public void setSource(ClassInfo source) {
+    public void setSource(String source) {
 	this.source = source;
     }
 
-    public ClassInfo getDestination() {
+    public String getDestination() {
 	return destination;
     }
 
-    public void setDestination(ClassInfo destination) {
+    public void setDestination(String destination) {
 	this.destination = destination;
     }
 

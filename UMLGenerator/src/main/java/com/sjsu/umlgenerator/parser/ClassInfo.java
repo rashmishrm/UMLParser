@@ -7,11 +7,15 @@ public class ClassInfo {
 
     private final List<MethodInfo> methods;
     private final List<AttributeInfo> attributeInfos;
+
+    private List<RelationshipInfo> relationshipInfos;
+
     private String name;
 
     public ClassInfo() {
 	methods = new ArrayList<MethodInfo>();
 	attributeInfos = new ArrayList<AttributeInfo>();
+	relationshipInfos = new ArrayList<RelationshipInfo>();
     }
 
     public ClassInfo(String name, List<MethodInfo> methods, List<AttributeInfo> attributeInfos) {
@@ -19,7 +23,6 @@ public class ClassInfo {
 	this.name = name;
 	this.methods = methods;
 	this.attributeInfos = attributeInfos;
-
     }
 
     public List<MethodInfo> getMethods() {
@@ -38,4 +41,7 @@ public class ClassInfo {
 	this.name = name;
     }
 
+    public List<RelationshipInfo> getRelationshipInfos() {
+	return relationshipInfos;
+    }
 }
