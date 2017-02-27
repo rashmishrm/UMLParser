@@ -5,15 +5,18 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Modifier;
+import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.Parameter;
+import com.github.javaparser.ast.expr.SimpleName;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 
@@ -92,6 +95,25 @@ public class ListClassesExample {
 
 		);
 
+	classInfo.getMethods().stream().forEach(
+
+		v ->
+
+		{
+		    String argument = "";
+		    for (final String argu : v.getArguemnts()) {
+			argument.concat(argu + ",");
+		    }
+		    if (argument.length() > 1) {
+			argument = argument.substring(0, argument.length() - 1);
+		    }
+
+		    buffer.append(getScopePlantUml(v.getScope())).append(v.getReturnType()).append(" ")
+		    .append(v.getName()).append(" (" + argument + ")").append("\n");
+		}
+
+		);
+
 	buffer.append("}\n");
 
 	return buffer;
@@ -106,9 +128,14 @@ public class ListClassesExample {
 		v ->
 
 		{
-		    buffer.append(v.getSource() + "  \"" + v.getLabelSource() + "\" " + getRelationSymbol(v.getType())
-		    + "  \"" + v.getLabelDestination() + "\"  " + v.getDestination() + " : "
-		    + v.getLabelRelationship() + "\n");
+		    if (v.getType().equals("contains")) {
+			buffer.append(v.getSource() + "  \"" + v.getLabelSource() + "\" "
+				+ getRelationSymbol(v.getType()) + "  \"" + v.getLabelDestination() + "\"  "
+				+ v.getDestination() + " : " + v.getLabelRelationship() + "\n");
+		    } else {
+			buffer.append(v.getSource() + getRelationSymbol(v.getType()) + v.getDestination() + " : "
+				+ v.getLabelRelationship() + "\n");
+		    }
 		}
 
 		);
@@ -139,6 +166,7 @@ public class ListClassesExample {
 
 	return result;
     }
+
     public static String getScopePlantUml(String scope) {
 	String result = "~";
 
@@ -212,7 +240,7 @@ public class ListClassesExample {
 
 		for (final ClassOrInterfaceType x : c.getExtendedTypes()) {
 		    final RelationshipInfo rInfo = new RelationshipInfo("extends", classInfo.getName(),
-			    x.getNameAsString(), "1", "1", "extends");
+			    x.getNameAsString(), null, null, "extends");
 
 		    classInfo.getRelationshipInfos().add(rInfo);
 		    appInfo.getRelationsList().add(rInfo);
@@ -221,7 +249,7 @@ public class ListClassesExample {
 
 		for (final ClassOrInterfaceType x : c.getImplementedTypes()) {
 		    final RelationshipInfo rInfo = new RelationshipInfo("implements", classInfo.getName(),
-			    x.getNameAsString(), "1", "1", "implements");
+			    x.getNameAsString(), null, null, "implements");
 		    classInfo.getRelationshipInfos().add(rInfo);
 		    appInfo.getRelationsList().add(rInfo);
 
@@ -238,6 +266,52 @@ public class ListClassesExample {
 	    System.out.println(n);
 	    // System.out.println(n.getVariables());
 
+	    final Node childNode = n.getVariable(0);
+	    String variableName = null;
+	    String type = null;
+	    boolean isCollection = false;
+
+	    for (final Node eachItem : childNode.getChildNodes()) {
+		if (eachItem instanceof SimpleName) {
+		    variableName = eachItem.toString();
+
+		} else if (eachItem instanceof ClassOrInterfaceType) {
+		    type = eachItem.toString();
+
+		    final ClassOrInterfaceType cType = (ClassOrInterfaceType) eachItem;
+
+
+
+
+		    if (type.contains("<")) {
+			final String array[] = type.split("<");
+			type = array[0];
+			final String genericType = array[1].substring(0, array[1].length() - 1);
+
+
+
+
+
+
+
+		    }
+
+		    try {
+			if (Class.forName("java.util." + type).isAssignableFrom(Collection.class)) {
+			    isCollection = true;
+			    System.out.println(isCollection);
+			}
+		    } catch (final ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		    }
+
+		} else if (eachItem instanceof SimpleName) {
+
+		}
+
+	    }
+
 	    if (arg instanceof ClassInfo) {
 		String modfier = null;
 		final ClassInfo classInfo = (ClassInfo) arg;
@@ -246,13 +320,16 @@ public class ListClassesExample {
 		    modfier = modifier.toString();
 		}
 
+
+
 		final AttributeInfo info = new AttributeInfo(modfier, n.getChildNodes().get(0).toString(),
 			n.getElementType().toString());
 		classInfo.getAttributeInfos().add(info);
 
-		if (appInfo.getClasses().contains(n.getElementType() + ".java")) {
+		if (appInfo.getClasses().contains(type + ".java")) {
+		    final String cardinality = isCollection ? "many" : "1";
 		    final RelationshipInfo rInfo = new RelationshipInfo("contains", classInfo.getName(),
-			    n.getElementType().toString(), "1", "1", "contains");
+			    variableName, "1", cardinality, "contains");
 		    classInfo.getRelationshipInfos().add(rInfo);
 		    appInfo.getRelationsList().add(rInfo);
 
