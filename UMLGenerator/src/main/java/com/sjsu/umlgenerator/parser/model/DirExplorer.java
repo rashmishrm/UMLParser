@@ -1,4 +1,4 @@
-package com.sjsu.umlgenerator.parser;
+package com.sjsu.umlgenerator.parser.model;
 
 import java.io.File;
 

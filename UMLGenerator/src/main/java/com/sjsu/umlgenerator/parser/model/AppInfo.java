@@ -1,4 +1,4 @@
-package com.sjsu.umlgenerator.parser;
+package com.sjsu.umlgenerator.parser.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,8 @@ public class AppInfo {
     private List<RelationshipInfo> relationsList;
 
     private Set<String> classes;
+
+    private String directory;
 
     public AppInfo() {
 	classInfoList = new ArrayList<>();
@@ -44,6 +46,14 @@ public class AppInfo {
 
     public void setClasses(Set<String> classes) {
 	this.classes = classes;
+    }
+
+    public String getDirectory() {
+	return directory;
+    }
+
+    public void setDirectory(String directory) {
+	this.directory = directory;
     }
 
 }
