@@ -28,6 +28,7 @@ public class VariableVisitor extends VoidVisitorAdapter<Object> {
 	final Node childNode = n.getVariable(0);
 	String variableName = null;
 	String type = null;
+	String genericType = null;
 	boolean isCollection = false;
 
 	for (final Node eachItem : childNode.getChildNodes()) {
@@ -42,18 +43,19 @@ public class VariableVisitor extends VoidVisitorAdapter<Object> {
 		if (type.contains("<")) {
 		    final String array[] = type.split("<");
 		    type = array[0];
-		    final String genericType = array[1].substring(0, array[1].length() - 1);
+		    genericType = array[1].substring(0, array[1].length() - 1);
 
 		}
 
 		try {
 		    if (Class.forName("java.util." + type).isAssignableFrom(Collection.class)) {
 			isCollection = true;
+			type = genericType;
 			System.out.println(isCollection);
 		    }
 		} catch (final ClassNotFoundException e) {
 		    // TODO Auto-generated catch block
-		    e.printStackTrace();
+		    // e.printStackTrace();
 		}
 
 	    } else if (eachItem instanceof SimpleName) {
@@ -76,7 +78,7 @@ public class VariableVisitor extends VoidVisitorAdapter<Object> {
 
 	    if (appInfo.getClasses().contains(type + ".java")) {
 		final String cardinality = isCollection ? "many" : "1";
-		final RelationshipInfo rInfo = new RelationshipInfo("contains", classInfo.getName(), variableName, "1",
+		final RelationshipInfo rInfo = new RelationshipInfo("contains", classInfo.getName(), type, "1",
 			cardinality, "contains");
 		classInfo.getRelationshipInfos().add(rInfo);
 		appInfo.getRelationsList().add(rInfo);
@@ -86,9 +88,4 @@ public class VariableVisitor extends VoidVisitorAdapter<Object> {
 
 	super.visit(n, arg);
     }
-    //
-    // @Override
-    // public void visit(final VariableDeclarator n, Void arg) {
-    //
-    // }
 }

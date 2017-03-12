@@ -23,6 +23,7 @@ public class PackageJavaParser implements IPackageParser {
 	final File directory = new File(projectDir);
 	final String[] name = directory.list();
 	appInfo.setClasses(new HashSet<String>(Arrays.asList(name)));
+	appInfo.setDirectory(directory.getName());
 
 	new DirExplorer((level, path, file) -> path.endsWith(".java"), (level, path, file) -> {
 	    try {

@@ -24,6 +24,7 @@ public class PlantUMLGenerator implements IUMLGenerator {
 	str.append("@enduml");
 
 	System.out.println(str);
+
 	OutputStream png;
 	try {
 	    png = new FileOutputStream(appInfo.getDirectory() + ".png");

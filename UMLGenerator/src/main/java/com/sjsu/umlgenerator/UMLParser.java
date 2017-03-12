@@ -11,7 +11,7 @@ public class UMLParser {
 
     public static void main(String[] args) {
 
-	final String folderPath = "/Users/rashmisharma/Documents/Spring 2017/cmpe202/rashmi/UMLGenerator/src/main/resources/umlparser/uml-parser-test-4";
+	final String folderPath = "/Users/rashmisharma/Documents/Spring 2017/cmpe202/personal-project/rashmi/UMLGenerator/src/main/resources/umlparser/uml-parser-test-4";
 
 	final UMLParser umlParser = new UMLParser();
 	umlParser.generateClassDiagram(folderPath);

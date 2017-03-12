@@ -30,7 +30,7 @@ public class ClassVisitor extends VoidVisitorAdapter<Object> {
 	    classInfo.setName(c.getNameAsString());
 
 	    for (final ClassOrInterfaceType x : c.getExtendedTypes()) {
-		final RelationshipInfo rInfo = new RelationshipInfo("extends", classInfo.getName(), x.getNameAsString(),
+		final RelationshipInfo rInfo = new RelationshipInfo("extends", x.getNameAsString(), classInfo.getName(),
 			null, null, "extends");
 
 		classInfo.getRelationshipInfos().add(rInfo);
