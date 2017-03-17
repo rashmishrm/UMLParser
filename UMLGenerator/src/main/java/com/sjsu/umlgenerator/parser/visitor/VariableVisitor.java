@@ -74,7 +74,7 @@ public class VariableVisitor extends VoidVisitorAdapter<Object> {
 
 	    final AttributeInfo info = new AttributeInfo(modfier, n.getChildNodes().get(0).toString(),
 		    n.getElementType().toString());
-	    classInfo.getAttributeInfos().add(info);
+	    classInfo.addAtributeInfo(info);
 
 	    if (appInfo.getClasses().contains(type + ".java")) {
 		final String cardinality = isCollection ? "many" : "1";

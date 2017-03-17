@@ -25,12 +25,21 @@ public class ClassInfo {
 	this.attributeInfos = attributeInfos;
     }
 
-    public List<MethodInfo> getMethods() {
-	return methods;
+
+
+    public void addMethodInfo(MethodInfo methodInfo) {
+	if (AccessSpecifierDisplayRules.getMethodRules().contains(methodInfo.getScope())) {
+	    methods.add(methodInfo);
+	}
     }
 
-    public List<AttributeInfo> getAttributeInfos() {
-	return attributeInfos;
+
+
+    public void addAtributeInfo(AttributeInfo attributeInfo) {
+	if (AccessSpecifierDisplayRules.getAttributeRules().contains(attributeInfo.getScope())) {
+
+	    attributeInfos.add(attributeInfo);
+	}
     }
 
     public String getName() {
