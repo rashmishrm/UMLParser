@@ -1,8 +1,18 @@
 package com.sjsu.umlgenerator;
 
+import java.io.File;
+
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+
 import com.sjsu.umlgenerator.parser.IPackageParser;
 import com.sjsu.umlgenerator.parser.PackageJavaParser;
 import com.sjsu.umlgenerator.parser.model.AppInfo;
+import com.sjsu.umlgenerator.util.logger.ConsoleLogger;
 
 public class UMLParser {
 
@@ -10,11 +20,34 @@ public class UMLParser {
     private final IPackageParser javaParser = new PackageJavaParser();
 
     public static void main(String[] args) {
+	// create Options object
+	final Options options = new Options();
 
-	final String folderPath = "/Users/rashmisharma/Documents/Spring 2017/cmpe202/personal-project/rashmi/UMLGenerator/src/main/resources/umlparser/uml-parser-test-4";
+	// add t option
+	options.addOption("d", true, "directory containing java files to be parsed");
+	final CommandLineParser parser = new DefaultParser();
 
-	final UMLParser umlParser = new UMLParser();
-	umlParser.generateClassDiagram(folderPath);
+	try {
+	    final CommandLine cmd = parser.parse(options, args);
+
+	    if (cmd.hasOption("d")) {
+		final String inputFolder = cmd.getOptionValue("d");
+		final File directory = new File(inputFolder);
+		if (directory.exists()) {
+		    final UMLParser umlParser = new UMLParser();
+		    umlParser.generateClassDiagram(inputFolder);
+		} else {
+		    ConsoleLogger.printLog("Please provide valid folder.  " + inputFolder);
+		}
+
+	    } else {
+		final HelpFormatter formatter = new HelpFormatter();
+		formatter.printHelp("umlparser", options);
+	    }
+	} catch (final ParseException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
     }
 
     public String generateClassDiagram(String projectDir) {
