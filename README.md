@@ -8,10 +8,12 @@ UML Generator takes source folder as input and generates class diagram as output
 How to Build this Application.
 
 1. Create
-mvn clean package
+  mvn clean package
 
-With Docker. Build Docker Image.
-2. docker build -t umlparser:latest .
 
-Run With Docker.
-3. docker run umlparser test-case-folder image_name.jpg
+2. With Docker. Build Docker Image
+  docker build -t umlparser:latest
+
+
+3. Run With Docker.
+    docker run umlparser test-case-folder image_name.jpg
