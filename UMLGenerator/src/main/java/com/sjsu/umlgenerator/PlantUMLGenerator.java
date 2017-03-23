@@ -11,7 +11,7 @@ import net.sourceforge.plantuml.SourceStringReader;
 public class PlantUMLGenerator implements IUMLGenerator {
 
     @Override
-    public String generateClassDiagram(AppInfo appInfo) {
+    public String generateClassDiagram(AppInfo appInfo, String fileName) {
 	final StringBuffer str = new StringBuffer("@startuml\n");
 	appInfo.getClassInfoList().stream().forEach(v -> {
 	    str.append(convertClasstoPlantUml(v).append("\n"));
@@ -27,7 +27,7 @@ public class PlantUMLGenerator implements IUMLGenerator {
 
 	OutputStream png;
 	try {
-	    png = new FileOutputStream(appInfo.getDirectory() + ".png");
+	    png = new FileOutputStream(fileName + ".png");
 	    final SourceStringReader reader = new SourceStringReader(str.toString());
 	    reader.generateImage(png);
 	} catch (final Exception e) {
@@ -35,7 +35,7 @@ public class PlantUMLGenerator implements IUMLGenerator {
 	    e.printStackTrace();
 	}
 
-	return appInfo.getDirectory() + ".png";
+	return fileName + ".png";
     }
 
     @Override

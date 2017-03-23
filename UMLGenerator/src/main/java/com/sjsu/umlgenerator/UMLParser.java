@@ -25,17 +25,20 @@ public class UMLParser {
 
 	// add t option
 	options.addOption("d", true, "directory containing java files to be parsed");
+	options.addOption("f", true, "output file name");
 	final CommandLineParser parser = new DefaultParser();
 
 	try {
 	    final CommandLine cmd = parser.parse(options, args);
 
-	    if (cmd.hasOption("d")) {
+	    if (cmd.hasOption("d") && cmd.hasOption("f")) {
 		final String inputFolder = cmd.getOptionValue("d");
+		final String outputFileName = cmd.getOptionValue("f");
+
 		final File directory = new File(inputFolder);
 		if (directory.exists()) {
 		    final UMLParser umlParser = new UMLParser();
-		    umlParser.generateClassDiagram(inputFolder);
+		    umlParser.generateClassDiagram(inputFolder, outputFileName);
 		} else {
 		    ConsoleLogger.printLog("Please provide valid folder.  " + inputFolder);
 		}
@@ -44,16 +47,17 @@ public class UMLParser {
 		final HelpFormatter formatter = new HelpFormatter();
 		formatter.printHelp("umlparser", options);
 	    }
+
 	} catch (final ParseException e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
     }
 
-    public String generateClassDiagram(String projectDir) {
+    public String generateClassDiagram(String projectDir, String outputFileName) {
 
 	final AppInfo appInfo = javaParser.buildAppInfo(projectDir);
-	final String fileName = generator.generateClassDiagram(appInfo);
+	final String fileName = generator.generateClassDiagram(appInfo, outputFileName);
 
 	return fileName;
     }
