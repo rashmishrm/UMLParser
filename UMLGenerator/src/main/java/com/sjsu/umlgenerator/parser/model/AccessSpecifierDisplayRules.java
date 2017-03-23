@@ -3,7 +3,7 @@ package com.sjsu.umlgenerator.parser.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.sjsu.umlgenerator.util.logger.Constants;
+import com.sjsu.umlgenerator.util.Constants;
 
 public class AccessSpecifierDisplayRules {
     private final static Set<String> methodRules = new HashSet<String>();

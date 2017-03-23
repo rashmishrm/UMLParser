@@ -46,7 +46,7 @@ public class PlantUMLGenerator implements IUMLGenerator {
 
     public static StringBuffer convertClasstoPlantUml(ClassInfo classInfo) {
 	final StringBuffer buffer = new StringBuffer();
-	buffer.append("class " + classInfo.getName() + "{\n");
+	buffer.append(classInfo.getType() + " " + classInfo.getName() + "{\n");
 
 	classInfo.getAttributeInfos().stream().forEach(
 

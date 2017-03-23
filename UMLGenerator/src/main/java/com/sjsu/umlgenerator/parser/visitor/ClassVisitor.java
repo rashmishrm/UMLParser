@@ -28,6 +28,7 @@ public class ClassVisitor extends VoidVisitorAdapter<Object> {
 	if (arg instanceof ClassInfo) {
 	    final ClassInfo classInfo = (ClassInfo) arg;
 	    classInfo.setName(c.getNameAsString());
+	    classInfo.setType(getType(c));
 
 	    for (final ClassOrInterfaceType x : c.getExtendedTypes()) {
 		final RelationshipInfo rInfo = new RelationshipInfo("extends", x.getNameAsString(), classInfo.getName(),
@@ -52,6 +53,16 @@ public class ClassVisitor extends VoidVisitorAdapter<Object> {
 
     public void setAppInfo(AppInfo appInfo) {
 	this.appInfo = appInfo;
+    }
+
+    public String getType(ClassOrInterfaceDeclaration c) {
+	String type = "class";
+	if (c.isInterface()) {
+	    type = "interface";
+	} else if (c.isAbstract()) {
+	    type = "abstract";
+	}
+	return type;
     }
 
 }

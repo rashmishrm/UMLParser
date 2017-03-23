@@ -12,6 +12,8 @@ public class ClassInfo {
 
     private String name;
 
+    private String type;
+
     public ClassInfo() {
 	methods = new ArrayList<MethodInfo>();
 	attributeInfos = new ArrayList<AttributeInfo>();
@@ -25,21 +27,25 @@ public class ClassInfo {
 	this.attributeInfos = attributeInfos;
     }
 
-
-
     public void addMethodInfo(MethodInfo methodInfo) {
 	if (AccessSpecifierDisplayRules.getMethodRules().contains(methodInfo.getScope())) {
 	    methods.add(methodInfo);
 	}
     }
 
-
-
     public void addAtributeInfo(AttributeInfo attributeInfo) {
 	if (AccessSpecifierDisplayRules.getAttributeRules().contains(attributeInfo.getScope())) {
 
 	    attributeInfos.add(attributeInfo);
 	}
+    }
+
+    public List<MethodInfo> getMethods() {
+	return methods;
+    }
+
+    public List<AttributeInfo> getAttributeInfos() {
+	return attributeInfos;
     }
 
     public String getName() {
@@ -52,5 +58,13 @@ public class ClassInfo {
 
     public List<RelationshipInfo> getRelationshipInfos() {
 	return relationshipInfos;
+    }
+
+    public String getType() {
+	return type;
+    }
+
+    public void setType(String type) {
+	this.type = type;
     }
 }
