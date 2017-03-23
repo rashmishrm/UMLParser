@@ -2,9 +2,9 @@ package com.sjsu.umlgenerator.util;
 
 public interface Constants {
 
-    String PUBLIC = "public";
-    String PRIVATE = "private";
-    String PROTECTED = "protected";
+    String PUBLIC = "PUBLIC";
+    String PRIVATE = "PRIVATE";
+    String PROTECTED = "PROTECTED";
 
     String PUBLIC_PLANT_NOTATION = "+";
     String PRIVATE_PLANT_NOTATION = "-";

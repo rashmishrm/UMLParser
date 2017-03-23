@@ -76,7 +76,7 @@ public class VariableVisitor extends VoidVisitorAdapter<Object> {
 		    n.getElementType().toString());
 	    classInfo.addAtributeInfo(info);
 
-	    if (appInfo.getClasses().contains(type + ".java")) {
+	    if (appInfo.getClasses().contains(type)) {
 		final String cardinality = isCollection ? "many" : "1";
 		final RelationshipInfo rInfo = new RelationshipInfo("contains", classInfo.getName(), type, "1",
 			cardinality, "contains");

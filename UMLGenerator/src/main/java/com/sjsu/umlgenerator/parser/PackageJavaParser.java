@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
@@ -22,7 +23,14 @@ public class PackageJavaParser implements IPackageParser {
 
 	final File directory = new File(projectDir);
 	final String[] name = directory.list();
-	appInfo.setClasses(new HashSet<String>(Arrays.asList(name)));
+	final Set<String> files = new HashSet<String>(Arrays.asList(name));
+	files.stream().forEach(v -> {
+	    if (v.contains(".java")) {
+		appInfo.getClasses().add(v.replaceAll(".java", ""));
+	    }
+
+	});
+
 	appInfo.setDirectory(directory.getName());
 
 	new DirExplorer((level, path, file) -> path.endsWith(".java"), (level, path, file) -> {
@@ -33,11 +41,10 @@ public class PackageJavaParser implements IPackageParser {
 		appInfo.getClassInfoList().add(cInfo);
 
 		new ClassVisitor(appInfo).visit(cu, cInfo);
-		new MethodVisitor().visit(cu, cInfo);
+		new MethodVisitor(appInfo).visit(cu, cInfo);
 
 		new VariableVisitor(appInfo).visit(cu, cInfo);
 
-		System.out.println(); // empty line
 	    } catch (final IOException e) {
 		new RuntimeException(e);
 	    }

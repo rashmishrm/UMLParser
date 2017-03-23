@@ -6,11 +6,12 @@ import java.util.Set;
 import com.sjsu.umlgenerator.util.Constants;
 
 public class AccessSpecifierDisplayRules {
-    private final static Set<String> methodRules = new HashSet<String>();
-    private final static Set<String> attributeRules = new HashSet<String>();
+    private  static Set<String> methodRules = null;
+    private  static Set<String> attributeRules = null;
 
-    public AccessSpecifierDisplayRules() {
-
+    static {
+	methodRules = new HashSet<String>();
+	attributeRules = new HashSet<String>();
 	methodRules.add(Constants.PUBLIC);
 	attributeRules.add(Constants.PUBLIC);
 	attributeRules.add(Constants.PRIVATE);

@@ -53,7 +53,8 @@ public class PlantUMLGenerator implements IUMLGenerator {
 		v ->
 
 		{
-		    buffer.append(getScopePlantUml(v.getScope())).append(v.getType()).append(" ").append(v.getName())
+		    buffer.append(getScopePlantUml(v.getScope()) + " " + getScopePlantUml(v.getScope()))
+		    .append(v.getType()).append(" ").append(v.getName())
 		    .append("\n");
 		}
 
@@ -71,9 +72,10 @@ public class PlantUMLGenerator implements IUMLGenerator {
 		    if (argument.length() > 1) {
 			argument = argument.substring(0, argument.length() - 1);
 		    }
-
-		    buffer.append(getScopePlantUml(v.getScope())).append(v.getReturnType()).append(" ")
-		    .append(v.getName()).append(" (" + argument + ")").append("\n");
+		    final String plantUMLScope = getScopePlantUml(v.getScope());
+		    buffer.append(plantUMLScope + " " + plantUMLScope).append(v.getName())
+		    .append("(" + argument + ") : ")
+		    .append(v.getReturnType()).append(" ").append("\n");
 		}
 
 		);
@@ -95,10 +97,9 @@ public class PlantUMLGenerator implements IUMLGenerator {
 		    if (v.getType().equals("contains")) {
 			buffer.append(v.getSource() + "  \"" + v.getLabelSource() + "\" "
 				+ getRelationSymbol(v.getType()) + "  \"" + v.getLabelDestination() + "\"  "
-				+ v.getDestination() + " : " + v.getLabelRelationship() + "\n");
+				+ v.getDestination() + "\n");
 		    } else {
-			buffer.append(v.getSource() + getRelationSymbol(v.getType()) + v.getDestination() + " : "
-				+ v.getLabelRelationship() + "\n");
+			buffer.append(v.getSource() + getRelationSymbol(v.getType()) + v.getDestination() + "\n");
 		    }
 		}
 
@@ -111,7 +112,7 @@ public class PlantUMLGenerator implements IUMLGenerator {
 
     public static String getRelationSymbol(String relation) {
 
-	String result = "~";
+	String result = ".";
 
 	if (relation != null) {
 	    switch (relation) {
@@ -123,6 +124,9 @@ public class PlantUMLGenerator implements IUMLGenerator {
 		break;
 	    case "implements":
 		result = " . ";
+		break;
+	    case "uses":
+		result = "..>";
 		break;
 
 	    }

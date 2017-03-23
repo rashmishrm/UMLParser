@@ -34,6 +34,7 @@ public class ClassInfo {
     }
 
     public void addAtributeInfo(AttributeInfo attributeInfo) {
+
 	if (AccessSpecifierDisplayRules.getAttributeRules().contains(attributeInfo.getScope())) {
 
 	    attributeInfos.add(attributeInfo);

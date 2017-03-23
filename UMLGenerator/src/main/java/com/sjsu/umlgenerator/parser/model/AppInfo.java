@@ -1,6 +1,7 @@
 package com.sjsu.umlgenerator.parser.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -16,6 +17,7 @@ public class AppInfo {
     public AppInfo() {
 	classInfoList = new ArrayList<>();
 	relationsList = new ArrayList<>();
+	classes = new HashSet<String>();
     }
 
     public AppInfo(List<ClassInfo> classInfoList, List<RelationshipInfo> relationsList) {
