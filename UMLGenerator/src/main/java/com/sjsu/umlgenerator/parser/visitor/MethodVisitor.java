@@ -53,7 +53,9 @@ public class MethodVisitor extends VoidVisitorAdapter<Object> {
 
 		    final BlockStmt bstmt = (BlockStmt) eachItem;
 		    bstmt.getStatements().stream().forEach(v -> {
-			appInfo.getClasses().stream().forEach(a -> {
+
+			appInfo.getInterfaces().stream().forEach(a -> {
+
 			    if (v.toString().contains(a)) {
 
 				final RelationshipInfo info = new RelationshipInfo("uses", classInfo.getName(), a, "",

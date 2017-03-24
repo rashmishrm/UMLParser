@@ -12,12 +12,15 @@ public class AppInfo {
 
     private Set<String> classes;
 
+    private Set<String> interfaces;
+
     private String directory;
 
     public AppInfo() {
 	classInfoList = new ArrayList<>();
 	relationsList = new ArrayList<>();
 	classes = new HashSet<String>();
+	interfaces = new HashSet<String>();
     }
 
     public AppInfo(List<ClassInfo> classInfoList, List<RelationshipInfo> relationsList) {
@@ -58,4 +61,7 @@ public class AppInfo {
 	this.directory = directory;
     }
 
+    public Set<String> getInterfaces() {
+	return interfaces;
+    }
 }
