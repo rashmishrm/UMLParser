@@ -55,9 +55,11 @@ public class UMLParser {
     }
 
     public String generateClassDiagram(String projectDir, String outputFileName) {
-
+	String fileName = null;
 	final AppInfo appInfo = javaParser.buildAppInfo(projectDir);
-	final String fileName = generator.generateClassDiagram(appInfo, outputFileName);
+	if (null != appInfo) {
+	    fileName = generator.generateClassDiagram(appInfo, outputFileName);
+	}
 
 	return fileName;
     }

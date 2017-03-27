@@ -7,4 +7,6 @@ public interface IUMLGenerator {
     public String generateClassDiagram(AppInfo appInfo, String fileName);
 
     public String generateSequenceDiagram();
+
+    public String buildPlantUmlIntermediateText(AppInfo appInfo);
 }

@@ -5,6 +5,7 @@ import java.io.OutputStream;
 
 import com.sjsu.umlgenerator.parser.model.AppInfo;
 import com.sjsu.umlgenerator.parser.model.ClassInfo;
+import com.sjsu.umlgenerator.util.logger.ConsoleLogger;
 
 import net.sourceforge.plantuml.SourceStringReader;
 
@@ -12,23 +13,12 @@ public class PlantUMLGenerator implements IUMLGenerator {
 
     @Override
     public String generateClassDiagram(AppInfo appInfo, String fileName) {
-	final StringBuffer str = new StringBuffer("@startuml\n");
-	appInfo.getClassInfoList().stream().forEach(v -> {
-	    str.append(convertClasstoPlantUml(v).append("\n"));
-	}
-
-		);
-
-	str.append(convertRelationtoPlantUML(appInfo));
-
-	str.append("@enduml");
-
-	System.out.println(str);
-
+	final String intermediateText = buildPlantUmlIntermediateText(appInfo);
+	ConsoleLogger.printLog("Intermediate Text:" + intermediateText);
 	OutputStream png;
 	try {
 	    png = new FileOutputStream(fileName + ".png");
-	    final SourceStringReader reader = new SourceStringReader(str.toString());
+	    final SourceStringReader reader = new SourceStringReader(intermediateText);
 	    reader.generateImage(png);
 	} catch (final Exception e) {
 	    // TODO Auto-generated catch block
@@ -44,19 +34,28 @@ public class PlantUMLGenerator implements IUMLGenerator {
 	return null;
     }
 
+    @Override
+    public String buildPlantUmlIntermediateText(AppInfo appInfo) {
+	final StringBuffer str = new StringBuffer("@startuml\n");
+	appInfo.getClassInfoList().stream().forEach(v -> {
+	    str.append(convertClasstoPlantUml(v).append("\n"));
+
+	});
+	str.append(convertRelationtoPlantUML(appInfo));
+	str.append("@enduml");
+	return str.toString();
+    }
+
     public static StringBuffer convertClasstoPlantUml(ClassInfo classInfo) {
 	final StringBuffer buffer = new StringBuffer();
 	buffer.append(classInfo.getType() + " " + classInfo.getName() + "{\n");
 
-	classInfo.getAttributeInfos().stream().forEach(
+	classInfo.getAttributeInfos().stream().forEach(v ->
 
-		v ->
-
-		{
-		    buffer.append(getScopePlantUml(v.getScope()) + " " + getScopePlantUml(v.getScope()))
-		    .append(v.getType()).append(" ").append(v.getName())
-		    .append("\n");
-		}
+	{
+	    buffer.append(getScopePlantUml(v.getScope()) + " " + getScopePlantUml(v.getScope())).append(v.getName())
+		    .append(":").append(v.getType()).append("\n");
+	}
 
 		);
 
@@ -73,15 +72,13 @@ public class PlantUMLGenerator implements IUMLGenerator {
 			argument = argument.substring(0, argument.length() - 1);
 		    }
 		    final String plantUMLScope = getScopePlantUml(v.getScope());
-		    if(v.isConstructor()){
+		    if (v.isConstructor()) {
 			buffer.append(plantUMLScope + " " + plantUMLScope).append(v.getName())
 			.append("(" + argument + ") : ").append("void").append(" ").append("\n");
 
-		    }
-		    else{
+		    } else {
 			buffer.append(plantUMLScope + " " + plantUMLScope).append(v.getName())
-			.append("(" + argument + ") : ")
-			.append(v.getReturnType()).append(" ").append("\n");
+			.append("(" + argument + ") : ").append(v.getReturnType()).append(" ").append("\n");
 		    }
 		}
 
@@ -102,9 +99,9 @@ public class PlantUMLGenerator implements IUMLGenerator {
 
 		{
 		    if (v.getType().equals("contains")) {
-			buffer.append(v.getSource() + "  \"" + v.getLabelSource() + "\" "
-				+ getRelationSymbol(v.getType()) + "  \"" + v.getLabelDestination() + "\"  "
-				+ v.getDestination() + "\n");
+			buffer.append(
+				v.getSource() + "  \"" + v.getLabelSource() + "\" " + getRelationSymbol(v.getType())
+				+ "  \"" + v.getLabelDestination() + "\"  " + v.getDestination() + "\n");
 		    } else {
 			buffer.append(v.getSource() + getRelationSymbol(v.getType()) + v.getDestination() + "\n");
 		    }

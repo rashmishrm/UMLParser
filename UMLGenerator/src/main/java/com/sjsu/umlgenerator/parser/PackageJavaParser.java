@@ -20,38 +20,42 @@ public class PackageJavaParser implements IPackageParser {
 
     @Override
     public AppInfo buildAppInfo(String projectDir) {
-	final AppInfo appInfo = new AppInfo();
+
 
 	final File directory = new File(projectDir);
-	final String[] name = directory.list();
-	final Set<String> files = new HashSet<String>(Arrays.asList(name));
-	files.stream().forEach(v -> {
-	    if (v.contains(".java")) {
-		appInfo.getClasses().add(v.replaceAll(".java", ""));
-	    }
+	if (directory.exists()) {
+	    final AppInfo appInfo = new AppInfo();
+	    final String[] name = directory.list();
+	    final Set<String> files = new HashSet<String>(Arrays.asList(name));
+	    files.stream().forEach(v -> {
+		if (v.contains(".java")) {
+		    appInfo.getClasses().add(v.replaceAll(".java", ""));
+		}
 
-	});
+	    });
 
-	appInfo.setDirectory(directory.getName());
+	    appInfo.setDirectory(directory.getName());
 
-	new DirExplorer((level, path, file) -> path.endsWith(".java"), (level, path, file) -> {
-	    try {
-		final CompilationUnit cu = JavaParser.parse(file);
-		final ClassInfo cInfo = new ClassInfo();
+	    new DirExplorer((level, path, file) -> path.endsWith(".java"), (level, path, file) -> {
+		try {
+		    final CompilationUnit cu = JavaParser.parse(file);
+		    final ClassInfo cInfo = new ClassInfo();
 
-		appInfo.getClassInfoList().add(cInfo);
+		    appInfo.getClassInfoList().add(cInfo);
 
-		new ClassVisitor(appInfo).visit(cu, cInfo);
-		new MethodVisitor(appInfo).visit(cu, cInfo);
+		    new ClassVisitor(appInfo).visit(cu, cInfo);
+		    new MethodVisitor(appInfo).visit(cu, cInfo);
 
-		new VariableVisitor(appInfo).visit(cu, cInfo);
-		new ConstructorVisitor(appInfo).visit(cu, cInfo);
+		    new VariableVisitor(appInfo).visit(cu, cInfo);
+		    new ConstructorVisitor(appInfo).visit(cu, cInfo);
 
-	    } catch (final IOException e) {
-		new RuntimeException(e);
-	    }
-	}).explore(directory);
+		} catch (final IOException e) {
+		    new RuntimeException(e);
+		}
+	    }).explore(directory);
+	    return appInfo;
 
-	return appInfo;
+	}
+	return null;
     }
 }
