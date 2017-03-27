@@ -73,9 +73,16 @@ public class PlantUMLGenerator implements IUMLGenerator {
 			argument = argument.substring(0, argument.length() - 1);
 		    }
 		    final String plantUMLScope = getScopePlantUml(v.getScope());
-		    buffer.append(plantUMLScope + " " + plantUMLScope).append(v.getName())
-		    .append("(" + argument + ") : ")
-		    .append(v.getReturnType()).append(" ").append("\n");
+		    if(v.isConstructor()){
+			buffer.append(plantUMLScope + " " + plantUMLScope).append(v.getName())
+			.append("(" + argument + ") : ").append("void").append(" ").append("\n");
+
+		    }
+		    else{
+			buffer.append(plantUMLScope + " " + plantUMLScope).append(v.getName())
+			.append("(" + argument + ") : ")
+			.append(v.getReturnType()).append(" ").append("\n");
+		    }
 		}
 
 		);

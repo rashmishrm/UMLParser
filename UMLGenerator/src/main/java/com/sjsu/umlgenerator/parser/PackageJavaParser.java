@@ -12,6 +12,7 @@ import com.sjsu.umlgenerator.parser.model.AppInfo;
 import com.sjsu.umlgenerator.parser.model.ClassInfo;
 import com.sjsu.umlgenerator.parser.model.DirExplorer;
 import com.sjsu.umlgenerator.parser.visitor.ClassVisitor;
+import com.sjsu.umlgenerator.parser.visitor.ConstructorVisitor;
 import com.sjsu.umlgenerator.parser.visitor.MethodVisitor;
 import com.sjsu.umlgenerator.parser.visitor.VariableVisitor;
 
@@ -44,6 +45,7 @@ public class PackageJavaParser implements IPackageParser {
 		new MethodVisitor(appInfo).visit(cu, cInfo);
 
 		new VariableVisitor(appInfo).visit(cu, cInfo);
+		new ConstructorVisitor(appInfo).visit(cu, cInfo);
 
 	    } catch (final IOException e) {
 		new RuntimeException(e);
