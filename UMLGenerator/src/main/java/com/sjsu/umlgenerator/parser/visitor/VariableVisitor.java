@@ -53,6 +53,10 @@ public class VariableVisitor extends VoidVisitorAdapter<Object> {
 			type = genericType;
 			System.out.println(isCollection);
 		    }
+		    else if (type.contains("[")) {
+			isCollection = true;
+
+		    }
 		} catch (final ClassNotFoundException e) {
 		    // TODO Auto-generated catch block
 		    // e.printStackTrace();
