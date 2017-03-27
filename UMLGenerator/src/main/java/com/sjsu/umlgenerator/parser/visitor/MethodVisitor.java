@@ -35,7 +35,7 @@ public class MethodVisitor extends VoidVisitorAdapter<Object> {
 	    final String parameters[] = new String[n.getParameters().size()];
 	    int i = 0;
 	    for (final Parameter param : n.getParameters()) {
-		parameters[i] = param.getType().toString();
+		parameters[i] = param.getNameAsString() + ":" + param.getType().toString();
 		i++;
 	    }
 	    String accessSpecifier = null;

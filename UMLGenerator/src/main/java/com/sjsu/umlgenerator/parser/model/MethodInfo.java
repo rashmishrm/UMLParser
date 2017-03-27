@@ -5,6 +5,7 @@ public class MethodInfo {
     private String scope;
     private String[] arguemnts;
     private String name;
+    private boolean constructor;
 
     public MethodInfo(String scope, String returnType, String name, String[] arguemnts) {
 	super();
@@ -44,6 +45,14 @@ public class MethodInfo {
 
     public void setName(String name) {
 	this.name = name;
+    }
+
+    public boolean isConstructor() {
+	return constructor;
+    }
+
+    public void setConstructor(boolean constructor) {
+	this.constructor = constructor;
     }
 
 }
