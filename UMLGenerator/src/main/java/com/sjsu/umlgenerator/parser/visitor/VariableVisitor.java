@@ -31,6 +31,11 @@ public class VariableVisitor extends VoidVisitorAdapter<Object> {
 	String genericType = null;
 	boolean isCollection = false;
 
+	if (n.toString().contains("[")) {
+	    isCollection = true;
+
+	}
+
 	for (final Node eachItem : childNode.getChildNodes()) {
 	    if (eachItem instanceof SimpleName) {
 		variableName = eachItem.toString();
@@ -78,11 +83,13 @@ public class VariableVisitor extends VoidVisitorAdapter<Object> {
 
 	    final AttributeInfo info = new AttributeInfo(modfier, n.getChildNodes().get(0).toString(),
 		    n.getElementType().toString());
+	    info.setCollection(isCollection);
+	    info.setCollectionLabel("*");
 	    classInfo.addAtributeInfo(info);
 
 	    if (appInfo.getClasses().contains(type)) {
-		final String cardinality = isCollection ? "*" : "1";
-		final RelationshipInfo rInfo = new RelationshipInfo("contains", classInfo.getName(), type, "1",
+		final String cardinality = isCollection ? "*" : " ";
+		final RelationshipInfo rInfo = new RelationshipInfo("contains", classInfo.getName(), type, " ",
 			cardinality, "contains");
 		classInfo.getRelationshipInfos().add(rInfo);
 		appInfo.getRelationsList().add(rInfo);

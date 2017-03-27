@@ -53,8 +53,13 @@ public class PlantUMLGenerator implements IUMLGenerator {
 	classInfo.getAttributeInfos().stream().forEach(v ->
 
 	{
-	    buffer.append(getScopePlantUml(v.getScope()) + " " + getScopePlantUml(v.getScope())).append(v.getName())
-		    .append(":").append(v.getType()).append("\n");
+	    if (v.isCollection()) {
+		buffer.append(getScopePlantUml(v.getScope()) + " " + getScopePlantUml(v.getScope())).append(v.getName())
+		.append(" : ").append(v.getType()).append("\n");
+	    } else {
+		buffer.append(getScopePlantUml(v.getScope()) + " " + getScopePlantUml(v.getScope())).append(v.getName())
+		.append(" : ").append(v.getType() + "(" + v.getCollectionLabel() + ")").append("\n");
+	    }
 	}
 
 		);

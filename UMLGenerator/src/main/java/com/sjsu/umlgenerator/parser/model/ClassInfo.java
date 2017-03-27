@@ -1,14 +1,16 @@
 package com.sjsu.umlgenerator.parser.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ClassInfo {
 
     private final List<MethodInfo> methods;
     private final List<AttributeInfo> attributeInfos;
 
-    private List<RelationshipInfo> relationshipInfos;
+    private Set<RelationshipInfo> relationshipInfos;
 
     private String name;
 
@@ -17,7 +19,7 @@ public class ClassInfo {
     public ClassInfo() {
 	methods = new ArrayList<MethodInfo>();
 	attributeInfos = new ArrayList<AttributeInfo>();
-	relationshipInfos = new ArrayList<RelationshipInfo>();
+	relationshipInfos = new HashSet<RelationshipInfo>();
     }
 
     public ClassInfo(String name, List<MethodInfo> methods, List<AttributeInfo> attributeInfos) {
@@ -57,7 +59,7 @@ public class ClassInfo {
 	this.name = name;
     }
 
-    public List<RelationshipInfo> getRelationshipInfos() {
+    public Set<RelationshipInfo> getRelationshipInfos() {
 	return relationshipInfos;
     }
 
@@ -68,4 +70,5 @@ public class ClassInfo {
     public void setType(String type) {
 	this.type = type;
     }
+
 }

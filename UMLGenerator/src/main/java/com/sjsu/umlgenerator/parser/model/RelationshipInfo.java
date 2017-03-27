@@ -67,4 +67,28 @@ public class RelationshipInfo {
 	this.labelRelationship = labelRelationship;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+	boolean same = false;
+	final RelationshipInfo other = (RelationshipInfo) obj;
+
+	if (other.getDestination().equals(this.getDestination())
+		&& other.getLabelDestination().equals(this.getLabelDestination())
+		&& other.getSource().equals(this.getSource()) && other.getLabelSource().equals(this.getLabelSource())
+		&& other.getType().equals(this.getType())) {
+	    same = true;
+	} else if (other.getDestination().equals(this.getSource()) && other.getSource().equals(this.getDestination())
+		&& other.getType().equals(this.getType())) {
+	    same = true;
+	}
+
+	return same;
+
+    }
+
+    @Override
+    public int hashCode() {
+	return source.hashCode();
+    }
+
 }
