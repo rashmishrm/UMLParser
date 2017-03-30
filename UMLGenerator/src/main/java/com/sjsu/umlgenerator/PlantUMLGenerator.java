@@ -132,7 +132,7 @@ public class PlantUMLGenerator implements IUMLGenerator {
 		result = "*--";
 		break;
 	    case "implements":
-		result = " . ";
+		result = " <|.. ";
 		break;
 	    case "uses":
 		result = "..>";

@@ -8,7 +8,7 @@ import java.util.Set;
 public class AppInfo {
 
     private List<ClassInfo> classInfoList;
-    private List<RelationshipInfo> relationsList;
+    private Set<RelationshipInfo> relationsList;
 
     private Set<String> classes;
 
@@ -18,12 +18,12 @@ public class AppInfo {
 
     public AppInfo() {
 	classInfoList = new ArrayList<>();
-	relationsList = new ArrayList<>();
+	relationsList = new HashSet<>();
 	classes = new HashSet<String>();
 	interfaces = new HashSet<String>();
     }
 
-    public AppInfo(List<ClassInfo> classInfoList, List<RelationshipInfo> relationsList) {
+    public AppInfo(List<ClassInfo> classInfoList, Set<RelationshipInfo> relationsList) {
 	super();
 	this.classInfoList = classInfoList;
 	this.relationsList = relationsList;
@@ -37,11 +37,11 @@ public class AppInfo {
 	this.classInfoList = classInfoList;
     }
 
-    public List<RelationshipInfo> getRelationsList() {
+    public Set<RelationshipInfo> getRelationsList() {
 	return relationsList;
     }
 
-    public void setRelationsList(List<RelationshipInfo> relationsList) {
+    public void setRelationsList(Set<RelationshipInfo> relationsList) {
 	this.relationsList = relationsList;
     }
 

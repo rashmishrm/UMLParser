@@ -4,9 +4,9 @@ public class RelationshipInfo {
     private String type;
     private String source;
     private String destination;
-    private String labelSource;
-    private String labelDestination;
-    private String labelRelationship;
+    private String labelSource = "";
+    private String labelDestination = "";
+    private String labelRelationship = "";
 
     public RelationshipInfo(String type, String source, String destination, String labelSource, String labelDestination,
 	    String labelRelationship) {
@@ -88,7 +88,7 @@ public class RelationshipInfo {
 
     @Override
     public int hashCode() {
-	return source.hashCode();
+	return type.hashCode();
     }
 
 }

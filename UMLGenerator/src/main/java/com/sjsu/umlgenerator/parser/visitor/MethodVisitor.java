@@ -35,6 +35,13 @@ public class MethodVisitor extends VoidVisitorAdapter<Object> {
 	    final String parameters[] = new String[n.getParameters().size()];
 	    int i = 0;
 	    for (final Parameter param : n.getParameters()) {
+
+		if (appInfo.getInterfaces().contains(param.getType().toString())) {
+		    final RelationshipInfo info = new RelationshipInfo("uses", classInfo.getName(),
+			    param.getType().toString(), "", "", "");
+		    appInfo.getRelationsList().add(info);
+		}
+
 		parameters[i] = param.getNameAsString() + ":" + param.getType().toString();
 		i++;
 	    }

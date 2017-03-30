@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.sjsu.umlgenerator.util.Constants;
+
 public class ClassInfo {
 
     private final List<MethodInfo> methods;
@@ -38,9 +40,30 @@ public class ClassInfo {
     public void addAtributeInfo(AttributeInfo attributeInfo) {
 
 	if (AccessSpecifierDisplayRules.getAttributeRules().contains(attributeInfo.getScope())) {
-
+	    if (checkGetterSetterPresent(attributeInfo)) {
+		attributeInfo.setType(Constants.PUBLIC);
+	    }
 	    attributeInfos.add(attributeInfo);
 	}
+    }
+
+    public boolean checkGetterSetterPresent(AttributeInfo attributeInfo) {
+	Boolean present = false;
+	boolean getter = false;
+	boolean setter = false;
+	for (final MethodInfo methodInfo : methods) {
+	    if (attributeInfo.getName().equals(methodInfo.getName().replaceFirst("get", "").toLowerCase())) {
+		getter = true;
+	    }
+	    if (attributeInfo.getName().equals(methodInfo.getName().replaceFirst("set", "").toLowerCase())) {
+		setter = true;
+	    }
+	    if (getter && setter) {
+		present = true;
+	    }
+	}
+
+	return present;
     }
 
     public List<MethodInfo> getMethods() {

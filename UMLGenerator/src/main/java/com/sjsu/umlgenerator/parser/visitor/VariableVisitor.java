@@ -31,12 +31,14 @@ public class VariableVisitor extends VoidVisitorAdapter<Object> {
 	String genericType = null;
 	boolean isCollection = false;
 
+
 	if (n.toString().contains("[")) {
 	    isCollection = true;
 
 	}
 
 	for (final Node eachItem : childNode.getChildNodes()) {
+
 	    if (eachItem instanceof SimpleName) {
 		variableName = eachItem.toString();
 

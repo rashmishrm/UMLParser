@@ -36,7 +36,7 @@ public class ClassVisitor extends VoidVisitorAdapter<Object> {
 
 	    for (final ClassOrInterfaceType x : c.getExtendedTypes()) {
 		final RelationshipInfo rInfo = new RelationshipInfo("extends", x.getNameAsString(), classInfo.getName(),
-			null, null, "extends");
+			"", "", "extends");
 
 		classInfo.getRelationshipInfos().add(rInfo);
 		appInfo.getRelationsList().add(rInfo);
@@ -45,7 +45,7 @@ public class ClassVisitor extends VoidVisitorAdapter<Object> {
 
 	    for (final ClassOrInterfaceType x : c.getImplementedTypes()) {
 		final RelationshipInfo rInfo = new RelationshipInfo("implements", classInfo.getName(),
-			x.getNameAsString(), null, null, "implements");
+			x.getNameAsString(), "", "", "implements");
 		classInfo.getRelationshipInfos().add(rInfo);
 		appInfo.getRelationsList().add(rInfo);
 
