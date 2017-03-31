@@ -1,6 +1,7 @@
 package com.sjsu.umlgenerator.parser.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -41,7 +42,7 @@ public class ClassInfo {
 
 	if (AccessSpecifierDisplayRules.getAttributeRules().contains(attributeInfo.getScope())) {
 	    if (checkGetterSetterPresent(attributeInfo)) {
-		attributeInfo.setType(Constants.PUBLIC);
+		attributeInfo.setScope(Constants.PUBLIC);
 	    }
 	    attributeInfos.add(attributeInfo);
 	}
@@ -49,20 +50,32 @@ public class ClassInfo {
 
     public boolean checkGetterSetterPresent(AttributeInfo attributeInfo) {
 	Boolean present = false;
-	boolean getter = false;
-	boolean setter = false;
+	MethodInfo getter = null;
+	MethodInfo setter = null;
+	int index = 0;
+
 	for (final MethodInfo methodInfo : methods) {
+
 	    if (attributeInfo.getName().equals(methodInfo.getName().replaceFirst("get", "").toLowerCase())) {
-		getter = true;
+		getter = methodInfo;
+
 	    }
 	    if (attributeInfo.getName().equals(methodInfo.getName().replaceFirst("set", "").toLowerCase())) {
-		setter = true;
+		setter = methodInfo;
 	    }
-	    if (getter && setter) {
-		present = true;
-	    }
-	}
+	    if (getter != null && setter != null) {
 
+		present = true;
+		break;
+	    }
+	    index++;
+	}
+	if (present) {
+	    final MethodInfo[] array = new MethodInfo[] { setter, getter };
+
+	    methods.removeAll(Arrays.asList(array));
+
+	}
 	return present;
     }
 

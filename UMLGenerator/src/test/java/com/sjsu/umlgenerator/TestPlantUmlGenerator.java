@@ -47,4 +47,24 @@ public class TestPlantUmlGenerator {
 	System.out.println(outputText);
 
     }
+
+    @Test
+    public void testCase4() {
+
+	final AppInfo appInfo = javaParser.buildAppInfo(
+		"/Users/rashmisharma/Documents/Spring_2017/cmpe202/personal-project/rashmi/UMLGenerator/src/test/resources/umlparser/uml-parser-test-4");
+	final String outputText = generator.buildPlantUmlIntermediateText(appInfo);
+	System.out.println(outputText);
+
+    }
+
+    @Test
+    public void testCase5() {
+
+	final AppInfo appInfo = javaParser.buildAppInfo(
+		"/Users/rashmisharma/Documents/Spring_2017/cmpe202/personal-project/rashmi/UMLGenerator/src/test/resources/umlparser/uml-parser-test-5");
+	final String outputText = generator.buildPlantUmlIntermediateText(appInfo);
+	System.out.println(outputText);
+
+    }
 }

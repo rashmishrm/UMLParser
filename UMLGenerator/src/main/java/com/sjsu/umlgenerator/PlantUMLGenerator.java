@@ -54,11 +54,13 @@ public class PlantUMLGenerator implements IUMLGenerator {
 
 	{
 	    if (v.isCollection()) {
-		buffer.append(getScopePlantUml(v.getScope()) + " " + getScopePlantUml(v.getScope())).append(v.getName())
-		.append(" : ").append(v.getType()).append("\n");
-	    } else {
+
 		buffer.append(getScopePlantUml(v.getScope()) + " " + getScopePlantUml(v.getScope())).append(v.getName())
 		.append(" : ").append(v.getType() + "(" + v.getCollectionLabel() + ")").append("\n");
+	    } else {
+		buffer.append(getScopePlantUml(v.getScope()) + " " + getScopePlantUml(v.getScope())).append(v.getName())
+		.append(" : ").append(v.getType()).append("\n");
+
 	    }
 	}
 
@@ -79,7 +81,7 @@ public class PlantUMLGenerator implements IUMLGenerator {
 		    final String plantUMLScope = getScopePlantUml(v.getScope());
 		    if (v.isConstructor()) {
 			buffer.append(plantUMLScope + " " + plantUMLScope).append(v.getName())
-			.append("(" + argument + ") : ").append("void").append(" ").append("\n");
+				.append("(" + argument + ") : ").append(" ").append(" ").append("\n");
 
 		    } else {
 			buffer.append(plantUMLScope + " " + plantUMLScope).append(v.getName())
@@ -132,7 +134,7 @@ public class PlantUMLGenerator implements IUMLGenerator {
 		result = "*--";
 		break;
 	    case "implements":
-		result = " <|.. ";
+		result = " ..|>";
 		break;
 	    case "uses":
 		result = "..>";

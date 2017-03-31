@@ -86,7 +86,7 @@ public class VariableVisitor extends VoidVisitorAdapter<Object> {
 	    final AttributeInfo info = new AttributeInfo(modfier, n.getChildNodes().get(0).toString(),
 		    n.getElementType().toString());
 	    info.setCollection(isCollection);
-	    info.setCollectionLabel("*");
+	    info.setCollectionLabel(isCollection ? "*" : "");
 	    classInfo.addAtributeInfo(info);
 
 	    if (appInfo.getClasses().contains(type)) {
