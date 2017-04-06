@@ -19,7 +19,8 @@ public class JavaParserUtil {
 
 	for (final Parameter param : parameters) {
 
-	    if (appInfo.getInterfaces().contains(param.getType().toString())) {
+	    if (!Constants.INTERFACE.equals(classInfo.getType())
+		    && appInfo.getInterfaces().contains(param.getType().toString())) {
 		final RelationshipInfo info = new RelationshipInfo("uses", classInfo.getName(),
 			param.getType().toString(), "", "", "");
 		appInfo.getRelationsList().add(info);

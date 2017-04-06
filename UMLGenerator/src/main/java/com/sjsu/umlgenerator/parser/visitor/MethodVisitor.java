@@ -10,6 +10,7 @@ import com.sjsu.umlgenerator.parser.model.AppInfo;
 import com.sjsu.umlgenerator.parser.model.ClassInfo;
 import com.sjsu.umlgenerator.parser.model.MethodInfo;
 import com.sjsu.umlgenerator.parser.model.RelationshipInfo;
+import com.sjsu.umlgenerator.util.Constants;
 import com.sjsu.umlgenerator.util.JavaParserUtil;
 
 /**
@@ -36,26 +37,27 @@ public class MethodVisitor extends VoidVisitorAdapter<Object> {
 	    final List<String> parameters = JavaParserUtil.getParameters(n.getParameters(), appInfo, classInfo);
 
 	    final String accessSpecifier = JavaParserUtil.accessModifier(n.getModifiers());
+	    if (!Constants.INTERFACE.equals(classInfo.getType())) {
+		for (final Node eachItem : n.getChildNodes()) {
+		    if (eachItem instanceof BlockStmt) {
 
-	    for (final Node eachItem : n.getChildNodes()) {
-		if (eachItem instanceof BlockStmt) {
+			final BlockStmt bstmt = (BlockStmt) eachItem;
+			bstmt.getStatements().stream().forEach(v -> {
 
-		    final BlockStmt bstmt = (BlockStmt) eachItem;
-		    bstmt.getStatements().stream().forEach(v -> {
+			    appInfo.getInterfaces().stream().forEach(a -> {
 
-			appInfo.getInterfaces().stream().forEach(a -> {
+				if (v.toString().contains(a)) {
 
-			    if (v.toString().contains(a)) {
+				    final RelationshipInfo info = new RelationshipInfo("uses", classInfo.getName(), a,
+					    "", "", "");
+				    appInfo.getRelationsList().add(info);
+				}
+			    });
 
-				final RelationshipInfo info = new RelationshipInfo("uses", classInfo.getName(), a, "",
-					"", "");
-				appInfo.getRelationsList().add(info);
-			    }
 			});
+			break;
 
-		    });
-		    break;
-
+		    }
 		}
 
 	    }
