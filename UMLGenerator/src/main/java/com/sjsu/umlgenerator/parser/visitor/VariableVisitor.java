@@ -20,6 +20,7 @@ public class VariableVisitor extends VoidVisitorAdapter<Object> {
     public VariableVisitor(AppInfo appInfo) {
 	this.appInfo = appInfo;
     }
+
     @Override
     public void visit(FieldDeclaration n, Object arg) {
 	System.out.println(n);
@@ -30,7 +31,6 @@ public class VariableVisitor extends VoidVisitorAdapter<Object> {
 	String type = null;
 	String genericType = null;
 	boolean isCollection = false;
-
 
 	if (n.toString().contains("[")) {
 	    isCollection = true;
@@ -59,8 +59,7 @@ public class VariableVisitor extends VoidVisitorAdapter<Object> {
 			isCollection = true;
 			type = genericType;
 			System.out.println(isCollection);
-		    }
-		    else if (type.contains("[")) {
+		    } else if (type.contains("[")) {
 			isCollection = true;
 
 		    }
@@ -83,19 +82,22 @@ public class VariableVisitor extends VoidVisitorAdapter<Object> {
 		modfier = modifier.toString();
 	    }
 
-	    final AttributeInfo info = new AttributeInfo(modfier, n.getChildNodes().get(0).toString(),
-		    n.getElementType().toString());
-	    info.setCollection(isCollection);
-	    info.setCollectionLabel(isCollection ? "*" : "");
-	    classInfo.addAtributeInfo(info);
-
+	    boolean relationShip = false;
 	    if (appInfo.getClasses().contains(type)) {
 		final String cardinality = isCollection ? "*" : " ";
-		final RelationshipInfo rInfo = new RelationshipInfo("contains", classInfo.getName(), type, " ",
-			cardinality, "contains");
+		final RelationshipInfo rInfo = new RelationshipInfo("association", classInfo.getName(), type, " ",
+			cardinality, "association");
 		classInfo.getRelationshipInfos().add(rInfo);
 		appInfo.getRelationsList().add(rInfo);
+		relationShip = true;
 
+	    }
+	    if (!relationShip) {
+		final AttributeInfo info = new AttributeInfo(modfier, n.getChildNodes().get(0).toString(),
+			n.getElementType().toString());
+		info.setCollection(isCollection);
+		info.setCollectionLabel(isCollection ? "*" : "");
+		classInfo.addAtributeInfo(info);
 	    }
 	}
 

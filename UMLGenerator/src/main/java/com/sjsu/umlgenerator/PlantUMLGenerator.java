@@ -56,7 +56,7 @@ public class PlantUMLGenerator implements IUMLGenerator {
 	    if (v.isCollection()) {
 
 		buffer.append(getScopePlantUml(v.getScope()) + " " + getScopePlantUml(v.getScope())).append(v.getName())
-		.append(" : ").append(v.getType() + "(" + v.getCollectionLabel() + ")").append("\n");
+		.append(" : ").append(v.getType() + "[" + v.getCollectionLabel() + "]").append("\n");
 	    } else {
 		buffer.append(getScopePlantUml(v.getScope()) + " " + getScopePlantUml(v.getScope())).append(v.getName())
 		.append(" : ").append(v.getType()).append("\n");
@@ -81,7 +81,7 @@ public class PlantUMLGenerator implements IUMLGenerator {
 		    final String plantUMLScope = getScopePlantUml(v.getScope());
 		    if (v.isConstructor()) {
 			buffer.append(plantUMLScope + " " + plantUMLScope).append(v.getName())
-				.append("(" + argument + ") : ").append(" ").append(" ").append("\n");
+			.append("(" + argument + ") : ").append(" ").append(" ").append("\n");
 
 		    } else {
 			buffer.append(plantUMLScope + " " + plantUMLScope).append(v.getName())
@@ -105,7 +105,7 @@ public class PlantUMLGenerator implements IUMLGenerator {
 		v ->
 
 		{
-		    if (v.getType().equals("contains")) {
+		    if (v.getType().equals("association")) {
 			buffer.append(
 				v.getSource() + "  \"" + v.getLabelSource() + "\" " + getRelationSymbol(v.getType())
 				+ "  \"" + v.getLabelDestination() + "\"  " + v.getDestination() + "\n");
@@ -138,6 +138,9 @@ public class PlantUMLGenerator implements IUMLGenerator {
 		break;
 	    case "uses":
 		result = "..>";
+		break;
+	    case "association":
+		result = "--";
 		break;
 
 	    }
