@@ -1,16 +1,16 @@
 package com.sjsu.umlgenerator.parser.visitor;
 
-import com.github.javaparser.ast.Modifier;
+import java.util.List;
+
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.MethodDeclaration;
-import com.github.javaparser.ast.body.Parameter;
 import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import com.sjsu.umlgenerator.parser.model.AppInfo;
 import com.sjsu.umlgenerator.parser.model.ClassInfo;
 import com.sjsu.umlgenerator.parser.model.MethodInfo;
 import com.sjsu.umlgenerator.parser.model.RelationshipInfo;
-import com.sjsu.umlgenerator.util.Constants;
+import com.sjsu.umlgenerator.util.JavaParserUtil;
 
 /**
  * Simple visitor implementation for visiting MethodDeclaration nodes.
@@ -32,28 +32,10 @@ public class MethodVisitor extends VoidVisitorAdapter<Object> {
 	if (arg instanceof ClassInfo) {
 
 	    final ClassInfo classInfo = (ClassInfo) arg;
-	    final String parameters[] = new String[n.getParameters().size()];
-	    int i = 0;
-	    for (final Parameter param : n.getParameters()) {
 
-		if (appInfo.getInterfaces().contains(param.getType().toString())) {
-		    final RelationshipInfo info = new RelationshipInfo("uses", classInfo.getName(),
-			    param.getType().toString(), "", "", "");
-		    appInfo.getRelationsList().add(info);
-		}
+	    final List<String> parameters = JavaParserUtil.getParameters(n.getParameters(), appInfo, classInfo);
 
-		parameters[i] = param.getNameAsString() + ":" + param.getType().toString();
-		i++;
-	    }
-	    String accessSpecifier = null;
-
-	    for (final Modifier modifier : n.getModifiers()) {
-		if (modifier.toString().equals(Constants.PROTECTED) || modifier.toString().equals(Constants.PUBLIC)
-			|| modifier.toString().equals(Constants.PRIVATE)) {
-		    accessSpecifier = modifier.toString();
-
-		}
-	    }
+	    final String accessSpecifier = JavaParserUtil.accessModifier(n.getModifiers());
 
 	    for (final Node eachItem : n.getChildNodes()) {
 		if (eachItem instanceof BlockStmt) {
