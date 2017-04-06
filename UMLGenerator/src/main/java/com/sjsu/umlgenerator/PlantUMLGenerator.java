@@ -75,9 +75,12 @@ public class PlantUMLGenerator implements IUMLGenerator {
 		    for (final String argu : v.getArguemnts()) {
 			argument.concat(argu + ",");
 		    }
+		    System.out.println("first" + argument);
+
 		    if (argument.length() > 1) {
 			argument = argument.substring(0, argument.length() - 1);
 		    }
+		    System.out.println("secomd" + argument);
 		    final String plantUMLScope = getScopePlantUml(v.getScope());
 		    if (v.isConstructor()) {
 			buffer.append(plantUMLScope + " " + plantUMLScope).append(v.getName())

@@ -1,13 +1,15 @@
 package com.sjsu.umlgenerator.parser.model;
 
+import java.util.List;
+
 public class MethodInfo {
     private String returnType;
     private String scope;
-    private String[] arguemnts;
+    private List<String> arguemnts;
     private String name;
     private boolean constructor;
 
-    public MethodInfo(String scope, String returnType, String name, String[] arguemnts) {
+    public MethodInfo(String scope, String returnType, String name, List<String> arguemnts) {
 	super();
 	this.returnType = returnType;
 	this.scope = scope;
@@ -31,11 +33,11 @@ public class MethodInfo {
 	this.scope = scope;
     }
 
-    public String[] getArguemnts() {
+    public List<String> getArguemnts() {
 	return arguemnts;
     }
 
-    public void setArguemnts(String[] arguemnts) {
+    public void setArguemnts(List<String> arguemnts) {
 	this.arguemnts = arguemnts;
     }
 
