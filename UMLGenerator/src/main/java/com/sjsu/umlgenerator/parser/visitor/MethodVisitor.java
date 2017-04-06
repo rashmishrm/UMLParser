@@ -64,6 +64,8 @@ public class MethodVisitor extends VoidVisitorAdapter<Object> {
 
 	    final MethodInfo m = new MethodInfo(accessSpecifier, n.getType().toString(), n.getNameAsString(),
 		    parameters);
+	    m.setStatic(JavaParserUtil.isStatic(n.getModifiers()));
+
 	    classInfo.addMethodInfo(m);
 
 	}

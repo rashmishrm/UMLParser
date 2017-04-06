@@ -46,4 +46,16 @@ public class JavaParserUtil {
 	return accessSpecifier;
     }
 
+    public static boolean isStatic(EnumSet<Modifier> modfiers) {
+	boolean isStatic = false;
+	for (final Modifier modifier : modfiers) {
+	    if (modifier.toString().equals(Constants.STATIC)) {
+		isStatic = true;
+		break;
+	    }
+	}
+
+	return isStatic;
+    }
+
 }

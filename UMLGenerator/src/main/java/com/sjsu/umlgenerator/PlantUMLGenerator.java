@@ -87,7 +87,8 @@ public class PlantUMLGenerator implements IUMLGenerator {
 			.append("(" + argument + ") : ").append(" ").append(" ").append("\n");
 
 		    } else {
-			buffer.append(plantUMLScope + " " + plantUMLScope).append(v.getName())
+			final String isstatic = v.isStatic() ? "{static}" : "";
+			buffer.append(isstatic + " " + plantUMLScope + " " + plantUMLScope).append(v.getName())
 			.append("(" + argument + ") : ").append(v.getReturnType()).append(" ").append("\n");
 		    }
 		}

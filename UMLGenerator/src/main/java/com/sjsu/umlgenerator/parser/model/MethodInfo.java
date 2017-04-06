@@ -9,6 +9,9 @@ public class MethodInfo {
     private String name;
     private boolean constructor;
 
+    private boolean isStatic;
+    private boolean isAbstract;
+
     public MethodInfo(String scope, String returnType, String name, List<String> arguemnts) {
 	super();
 	this.returnType = returnType;
@@ -55,6 +58,22 @@ public class MethodInfo {
 
     public void setConstructor(boolean constructor) {
 	this.constructor = constructor;
+    }
+
+    public boolean isAbstract() {
+	return isAbstract;
+    }
+
+    public boolean isStatic() {
+	return isStatic;
+    }
+
+    public void setAbstract(boolean isAbstract) {
+	this.isAbstract = isAbstract;
+    }
+
+    public void setStatic(boolean isStatic) {
+	this.isStatic = isStatic;
     }
 
 }

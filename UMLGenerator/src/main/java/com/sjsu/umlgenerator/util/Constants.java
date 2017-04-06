@@ -5,6 +5,7 @@ public interface Constants {
     String PUBLIC = "PUBLIC";
     String PRIVATE = "PRIVATE";
     String PROTECTED = "PROTECTED";
+    String STATIC = "STATIC";
 
     String PUBLIC_PLANT_NOTATION = "+";
     String PRIVATE_PLANT_NOTATION = "-";
