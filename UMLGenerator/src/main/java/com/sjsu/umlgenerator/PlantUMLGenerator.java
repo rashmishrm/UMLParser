@@ -73,7 +73,7 @@ public class PlantUMLGenerator implements IUMLGenerator {
 		{
 		    String argument = "";
 		    for (final String argu : v.getArguemnts()) {
-			argument.concat(argu + ",");
+			argument += argu + ",";
 		    }
 		    System.out.println("first" + argument);
 
