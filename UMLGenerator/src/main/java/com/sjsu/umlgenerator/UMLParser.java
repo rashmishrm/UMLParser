@@ -26,6 +26,8 @@ public class UMLParser {
 	// add t option
 	options.addOption("d", true, "directory containing java files to be parsed");
 	options.addOption("f", true, "output file name");
+	options.addOption("t", true, "which type of diagram? 1-> class, 2-> sequence");
+
 	final CommandLineParser parser = new DefaultParser();
 
 	try {
@@ -34,11 +36,18 @@ public class UMLParser {
 	    if (cmd.hasOption("d") && cmd.hasOption("f")) {
 		final String inputFolder = cmd.getOptionValue("d");
 		final String outputFileName = cmd.getOptionValue("f");
-
+		String type = cmd.getOptionValue("t");
+		type = type == null ? "1" : type;
 		final File directory = new File(inputFolder);
 		if (directory.exists()) {
 		    final UMLParser umlParser = new UMLParser();
-		    umlParser.generateClassDiagram(inputFolder, outputFileName);
+		    if ("1".equals(type)) {
+			umlParser.generateClassDiagram(inputFolder, outputFileName);
+
+		    } else if ("2".equals(type)) {
+			// TODO
+
+		    }
 		} else {
 		    ConsoleLogger.printLog("Please provide valid folder.  " + inputFolder);
 		}

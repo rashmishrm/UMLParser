@@ -16,4 +16,7 @@ public interface Constants {
     String CLASS = "class";
     String INTERFACE = "interface";
 
+    String DIAGRAM_TYPE_CLASS = "1";
+    String DIAGRAM_TYPE_SEQUENCE = "2";
+
 }
