@@ -4,7 +4,14 @@
 
 UML Generator takes source folder as input and generates class diagram as output
 
-
+## Environment setup
+  1. Requires Java 8 version
+  2. Requires Graphviz installed on machine
+  
+  Linux Command
+  ```
+  sudo apt-get install graphviz
+  ```
 ## How to Build this Application.
 
  Create Jar file.
@@ -15,7 +22,11 @@ UML Generator takes source folder as input and generates class diagram as output
 ## How to Run this Application.
 
   ### 1. Run Manually.
-  ```
+  ``
+  You can find test folder under test-cases folder. 
+  umlgenerator.jar can be found in Executable-Jar folder.
+  
+  
   java -jar umlgenerator.jar
   usage: umlparser
  -d <arg>   directory containing java files to be parsed
@@ -37,4 +48,4 @@ UML Generator takes source folder as input and generates class diagram as output
   3. Run With Docker.
   ```
     docker run umlparser test-case-folder image_name.jpg
-    ```
+  ```
