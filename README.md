@@ -8,6 +8,17 @@ UML Generator takes source folder as input and generates class diagram as output
   1. Requires Java 8 version
   2. Requires Graphviz installed on machine
   
+  Windows:
+  ```
+  http://www.graphviz.org/Download..php
+  ```
+  Mac Command:
+   ```
+  brew install libtool
+  brew link libtool
+  brew install graphviz
+  brew link --overwrite graphviz
+  ```
   Linux Command
   ```
   sudo apt-get install graphviz
