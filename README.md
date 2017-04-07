@@ -38,14 +38,13 @@ UML Generator takes source folder as input and generates class diagram as output
  ```
   java -jar umlgenerator.jar -d /Users/rashmisharma/Documents/Spring_2017/cmpe202/personal-project/umlparser/uml-parser-test-1 -f first -t 1
   ```
-
-  ### 2. With Docker. 
-    #### a) Build Docker Image
+### 2. With Docker. 
+    a) Build Docker Image
     ```
     docker build -t umlparser:latest
- ```
+    ```
 
   3. Run With Docker.
-  ```
+     ```
     docker run umlparser test-case-folder image_name.jpg
-  ```
+    ```
