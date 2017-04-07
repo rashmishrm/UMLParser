@@ -21,7 +21,7 @@ UML Generator takes source folder as input and generates class diagram as output
 
 ## How to Run this Application.
 
-  ### 1. Run Manually.
+   ## Run Manually.
   ```
   You can find test folder under test-cases folder. 
   umlgenerator.jar can be found in Executable-Jar folder.
@@ -38,13 +38,17 @@ UML Generator takes source folder as input and generates class diagram as output
  ```
   java -jar umlgenerator.jar -d /Users/rashmisharma/Documents/Spring_2017/cmpe202/personal-project/umlparser/uml-parser-test-1 -f first -t 1
   ```
-### 2. With Docker. 
+  ## With Docker
+    
     a) Build Docker Image
+    
     ```
     docker build -t umlparser:latest
-    ```
-
-  3. Run With Docker.
+     ```
+    
+    b) Run With Docker.
+    
      ```
     docker run umlparser test-case-folder image_name.jpg
-    ```
+     ```
+    
