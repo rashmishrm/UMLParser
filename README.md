@@ -22,7 +22,7 @@ UML Generator takes source folder as input and generates class diagram as output
 ## How to Run this Application.
 
   ### 1. Run Manually.
-  ``
+  ```
   You can find test folder under test-cases folder. 
   umlgenerator.jar can be found in Executable-Jar folder.
   
