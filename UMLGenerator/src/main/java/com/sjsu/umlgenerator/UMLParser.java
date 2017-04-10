@@ -45,7 +45,7 @@ public class UMLParser {
 			umlParser.generateClassDiagram(inputFolder, outputFileName);
 
 		    } else if ("2".equals(type)) {
-			// TODO
+			umlParser.generateSequenceDiagram(inputFolder, outputFileName);
 
 		    }
 		} else {
@@ -73,4 +73,12 @@ public class UMLParser {
 	return fileName;
     }
 
+    public String generateSequenceDiagram(String projectDir, String outputFileName) {
+	final Runner runner = new Runner();
+	// final String folder =
+	// "/Users/rashmisharma/Documents/Spring_2017/cmpe202/personal-project/rashmi/test-cases/umlparser/uml-sequence-test";
+
+	System.out.println(runner.run(projectDir));
+	return null;
+    }
 }

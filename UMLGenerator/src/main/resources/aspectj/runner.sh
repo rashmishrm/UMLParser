@@ -1,34 +1,36 @@
 #!/bin/bash
 
-export CLASSPATH=/Users/rashmisharma/Documents/Spring_2017/cmpe202/personal-project/aspectj1.8/lib/aspectjrt.jar:.
-export ASPECTJ_HOME=/Users/rashmisharma/Documents/Spring_2017/cmpe202/personal-project/aspectj1.8
-export ASPECTJ_RT=/Users/rashmisharma/Documents/Spring_2017/cmpe202/personal-project/aspectj1.8/lib/aspectjrt.jar
-export ASPECT_LIB=/Users/rashmisharma/Documents/Spring_2017/cmpe202/personal-project/aspectj1.8/lib
-export PATH=$PATH:$ASPECTJ_HOME/bin:$JAVA_HOME/bin
-#CLASSPATH=$CLASSPATH:$ASPECTJ_HOME:$ASPECTJ_RT:$ASPECT_LIB
-PROJECT_HOME=/Users/rashmisharma/Documents/Spring_2017/cmpe202/personal-project/rashmi/UMLGenerator
 
-INPUT_FOLDER=/Users/rashmisharma/Documents/Spring_2017/cmpe202/personal-project/rashmi/test-cases/umlparser/uml-sequence-test
+INPUT_FOLDER=$1
+ASPECT_LIB=$2
+ASPECT_FOLDER=$3
+ASPECT_FILE=$4
+
+echo
+
+echo $INPUT_FOLDER
+echo $ASPECT_LIB
+echo $ASPECT_FOLDER
+echo $ASPECT_FILE
 
 for i in 'aspectjtools.jar' 'aspectjrt.jar'
 do
-    CLASSPATH=$CLASSPATH:/Users/rashmisharma/Documents/Spring_2017/cmpe202/personal-project/aspectj1.8/lib/$i
+    CLASSPATH=$CLASSPATH:$ASPECT_LIB/$i
 done
 
-JAR_DIR=/Users/rashmisharma/Documents/Spring_2017/cmpe202/personal-project/rashmi/test-cases/umlparser/uml-sequence-test/compile-time
+#JAR_DIR=$INPUT_FOLDER/compile-time
 
-CLASSES_DIR=/Users/rashmisharma/Documents/Spring_2017/cmpe202/personal-project/rashmi/test-cases/umlparser/uml-sequence-test/compile-time
+CLASSES_DIR=$INPUT_FOLDER/compile-time
 
 rm -rf $CLASSES_DIR
 mkdir $CLASSES_DIR
 
-cp $PROJECT_HOME/src/main/java/com/sjsu/umlgenerator/aspect/MethodInterceptor.aj $INPUT_FOLDER
+cp $ASPECT_FOLDER/$ASPECT_FILE $INPUT_FOLDER
 
 # Compile the sources
 echo "Compiling..."
-#javac -classpath $CLASSPATH -g -d $CLASSES_DIR $INPUT_FOLDER/*.java
 
-java -cp $CLASSPATH org.aspectj.tools.ajc.Main -source 1.5 -d $CLASSES_DIR $INPUT_FOLDER/*.java $INPUT_FOLDER/MethodInterceptor.aj
+java -cp $CLASSPATH org.aspectj.tools.ajc.Main -source 1.5 -d $CLASSES_DIR $INPUT_FOLDER/*.java $INPUT_FOLDER/$ASPECT_FILE
 
 # Run the example and check that aspect logic is applied
 echo "Running the sample..."
