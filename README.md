@@ -36,7 +36,7 @@ UML Generator takes source folder as input and generates class diagram as output
   ```
   You can find test folder under test-cases folder. 
   umlgenerator.jar can be found in Executable-Jar folder.
-  
+  Copy Executable-Jar folder in your local machine and run below command from Executable-Jar folder only.
   
   java -jar umlgenerator.jar
   usage: umlparser
