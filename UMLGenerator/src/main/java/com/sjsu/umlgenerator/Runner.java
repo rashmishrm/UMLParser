@@ -31,13 +31,15 @@ public class Runner {
 
     public String run(String folder) {
 	final String file = new File(".").getAbsolutePath();
-	final ClassLoader classLoader = getClass().getClassLoader();
-	final File fileRunner = new File(classLoader.getResource("aspectj/runner.sh").getFile());
-	final File aspectLib = new File(classLoader.getResource("aspectj/lib").getFile());
-	final File interceptorPath = new File(
-		classLoader.getResource("com/sjsu/umlgenerator/aspect").getFile());
 
-	final String command = "sh  " + fileRunner.getAbsolutePath() + " " + folder
+
+	final String newFile = file.replace("/.", "");
+
+	final String fileRunner = newFile + "/aspectj/runner.sh";
+	final String aspectLib = newFile + "/aspectj/lib";
+	final String interceptorPath = newFile + "/aspectj";
+
+	final String command = "sh  " + fileRunner + " " + folder
 		+ " " + aspectLib + " " + interceptorPath + " MethodInterceptor.aj";
 	return executeCommand(command);
 
