@@ -31,7 +31,7 @@ public class Runner {
     public void run(String folder) {
 
 	folder = "/Users/rashmisharma/Documents/Spring_2017/cmpe202/personal-project/rashmi/test-cases/umlparser/uml-sequence-test";
-	final String command = "/Users/rashmisharma/Documents/Spring_2017/cmpe202/personal-project/aspectj1.8/lib/ajc -outxml -outjar aspects.jar  MethodInterceptorjAJ.java";
+	final String command = "sh /Users/rashmisharma/Documents/Spring_2017/cmpe202/personal-project/rashmi/UMLGenerator/src/main/resources/aspectj/runner.sh";
 	executeCommand(command);
 
     }
