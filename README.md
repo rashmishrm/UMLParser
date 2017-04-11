@@ -1,4 +1,7 @@
 
+[![Stories in In%20Progress](https://badge.waffle.io/rashmishrm/cmpe202-UMLParser.png?label=In%20Progress&title=In%20Progress)](https://waffle.io/rashmishrm/cmpe202-UMLParser)
+
+[![Stories in Ready](https://badge.waffle.io/rashmishrm/cmpe202-UMLParser.png?label=Ready&title=Ready)](https://waffle.io/rashmishrm/cmpe202-UMLParser)
 
 # UML Generator
 
