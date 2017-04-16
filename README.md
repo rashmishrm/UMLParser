@@ -37,26 +37,26 @@ UML Generator takes source folder as input and generates class diagram as output
 
 
 
-  ## Run Manually.
-   ```
-   Download Executable-Jar folder. 
+   ## Run Manually
+     ```
+      Download Executable-Jar folder. 
     
-    1. cd <PATH_TO_EXECUTABLE-JAR_FOLDER> 
-    2. sh umlparser.sh <input-folder> <outputfile_name>
-    ```
+      1. cd <PATH_TO_EXECUTABLE-JAR_FOLDER> 
+      2. sh umlparser.sh <input-folder> <outputfile_name>
+      ```
    
-  ```
-  ## With Docker
+ 
+    ## With Docker
     
     a) Build Docker Image
     
-    ```
-    docker build -t umlparser:latest
-     ```
+      ```
+      docker build -t umlparser:latest
+      ```
     
     b) Run With Docker.
     
-     ```
-    docker run umlparser test-case-folder image_name.jpg
-     ```
+      ```
+      docker run umlparser test-case-folder image_name.jpg
+      ```
     
