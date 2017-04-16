@@ -35,22 +35,16 @@ UML Generator takes source folder as input and generates class diagram as output
 
 ## How to Run this Application.
 
-   ## Run Manually.
-  ```
-  You can find test folder under test-cases folder. 
-  umlgenerator.jar can be found in Executable-Jar folder.
-  Copy Executable-Jar folder in your local machine and run below command from Executable-Jar folder only.
-  
-  java -jar umlgenerator.jar
-  usage: umlparser
- -d <arg>   directory containing java files to be parsed
- -f <arg>   output file name
- -t <arg>   which type of diagram? 1-> class, 2-> sequence
- ```
 
- Sample Command:
- ```
-  java -jar umlgenerator.jar -d /Users/rashmisharma/Documents/Spring_2017/cmpe202/personal-project/umlparser/uml-parser-test-1 -f first -t 1
+
+  ## Run Manually.
+   ```
+   Download Executable-Jar folder. 
+    
+    1. cd <PATH_TO_EXECUTABLE-JAR_FOLDER> 
+    2. sh umlparser.sh <input-folder> <outputfile_name>
+    ```
+   
   ```
   ## With Docker
     
