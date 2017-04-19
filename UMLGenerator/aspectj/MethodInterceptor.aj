@@ -1,6 +1,7 @@
-
+import java.util.*;
 
 public aspect MethodInterceptor {
+      Stack<String> st = new Stack<String>();
 
 	//pointcut traced() : !within(MethodInterceptor) && execution(public * *.*(..)) ;
 	pointcut traced() : !within(MethodInterceptor) && execution( * *.*(..)) && !initialization(*.new(..));
@@ -59,6 +60,10 @@ System.out.println(currentClassName);
       if(methodName.contains(".")){
       methodName=methodName.split("\\.")[1];
       }
+      if(st.size()>0){
+
+      sender=st.peek();
+      }
 
       String methodCall=methodName+":"+returnType;
 
@@ -66,6 +71,10 @@ System.out.println(currentClassName);
 System.out.println(sender+"->"+currentClassName+":"+methodCall);
 
 currentClass=currentClassName;
+
+       st.push(currentClass);
+
+
 previousClass=currentClass;
 		callDepth++;
 
@@ -78,8 +87,9 @@ previousClass=currentClass;
 	after() : traced() {
 		callDepth--;
 
+      st.pop();
 
-		currentClass=previousClass;
+		//currentClass=previousClass;
 	}
 
 	private void print(String prefix, Object message) {
