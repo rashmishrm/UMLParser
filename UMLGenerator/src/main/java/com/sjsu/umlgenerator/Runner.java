@@ -47,7 +47,7 @@ public class Runner {
 
     public static void main(String[] args) {
 	final Runner runner = new Runner();
-	final String folder = "/Users/rashmisharma/Documents/Spring_2017/cmpe202/personal-project/rashmi/UMLGenerator/src/main/resources/umlparser/uml-sequence-test";
+	final String folder = "/Users/rashmisharma/Documents/Spring_2017/cmpe202/personal-project/umlparser/uml-sequence-test";
 
 	System.out.println(runner.run(folder));
     }
