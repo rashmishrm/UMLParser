@@ -4,15 +4,21 @@ public aspect MethodInterceptor {
       Stack<String> st = new Stack<String>();
 
 	//pointcut traced() : !within(MethodInterceptor) && execution(public * *.*(..)) ;
-	pointcut traced() : !within(MethodInterceptor) && execution( * *.*(..)) && !initialization(*.new(..));
+	pointcut traced() : !within(MethodInterceptor) && execution( * *.*(..));
+
+
+
 private String previousClass;
 private String currentClass;
 private int callDepth=1;
 
+
+
+
 	before() : traced() {
 
 
-String prefix=null;
+        String prefix=null;
 			if(callDepth==1){
         prefix="NEW_CALL:";
 
@@ -31,10 +37,10 @@ String prefix=null;
 
       String array[]=signature.split("\\s");
          String methodName=array[1];
-System.out.println(signature);
+        System.out.println(signature);
          if(methodName.contains("."))
          currentClassName=methodName.split("\\.")[0];
-System.out.println(currentClassName);
+        System.out.println(currentClassName);
 
         }
         String sender=null;
@@ -89,7 +95,6 @@ previousClass=currentClass;
 
       st.pop();
 
-		//currentClass=previousClass;
 	}
 
 	private void print(String prefix, Object message) {
