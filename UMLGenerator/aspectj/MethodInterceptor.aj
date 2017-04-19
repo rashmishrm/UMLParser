@@ -11,6 +11,8 @@ public aspect MethodInterceptor {
 private String previousClass;
 private String currentClass;
 private int callDepth=1;
+private String activate;
+private String deactivate;
 
 
 
@@ -52,10 +54,12 @@ private int callDepth=1;
        else  if(previousClass.equals(currentClassName)){
         sender=currentClassName;
 
+
         }
         else{
         sender=previousClass;
         }
+
 
       String call=  thisJoinPointStaticPart.getSignature().toString();
 
@@ -76,6 +80,12 @@ private int callDepth=1;
 //System.out.println(callDepth+"::::"+prefix+":::: "+sender+"------>" + methodCall+"---->"+currentClassName);
 System.out.println(sender+"->"+currentClassName+":"+methodCall);
 
+if(currentClassName !=null && !currentClassName.equals(activate)){
+
+                System.out.println("activate "+currentClassName);
+                activate=currentClassName;
+
+}
 currentClass=currentClassName;
 
        st.push(currentClass);
@@ -92,6 +102,17 @@ previousClass=currentClass;
 
 	after() : traced() {
 		callDepth--;
+if(currentClass !=null){
+if(currentClass.equals(activate)){
+activate=null;
+}
+                System.out.println("deactivate "+currentClass);
+                deactivate=currentClass;
+
+
+
+}
+
 
       st.pop();
 
