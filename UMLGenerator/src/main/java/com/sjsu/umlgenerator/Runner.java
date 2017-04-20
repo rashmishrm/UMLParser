@@ -18,7 +18,12 @@ public class Runner {
 
 	    String line = "";
 	    while ((line = reader.readLine()) != null) {
-		output.append(line + "\n");
+
+		if (line.contains("ASPECJ_TRACE:")) {
+		    line = line.replace("ASPECJ_TRACE:", "");
+		    output.append(line + "\n");
+		}
+
 	    }
 
 	} catch (final Exception e) {

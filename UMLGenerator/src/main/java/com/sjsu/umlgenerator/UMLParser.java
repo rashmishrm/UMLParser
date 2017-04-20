@@ -75,10 +75,10 @@ public class UMLParser {
 
     public String generateSequenceDiagram(String projectDir, String outputFileName) {
 	final Runner runner = new Runner();
-	// final String folder =
-	// "/Users/rashmisharma/Documents/Spring_2017/cmpe202/personal-project/rashmi/test-cases/umlparser/uml-sequence-test";
 
-	System.out.println(runner.run(projectDir));
-	return null;
+	final String output = runner.run(projectDir);
+	final String fileName = generator.generateSequenceDiagram(output, outputFileName);
+
+	return fileName;
     }
 }
