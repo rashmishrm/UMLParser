@@ -17,6 +17,7 @@ public class Runner {
 	    final BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
 	    output.append("@startuml" + "\n");
+	    output.append("autonumber \n");
 	    String line = "";
 	    while ((line = reader.readLine()) != null) {
 
