@@ -16,6 +16,7 @@ public class Runner {
 	    p.waitFor();
 	    final BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
+	    output.append("@startuml" + "\n");
 	    String line = "";
 	    while ((line = reader.readLine()) != null) {
 
@@ -25,6 +26,7 @@ public class Runner {
 		}
 
 	    }
+	    output.append("@enduml");
 
 	} catch (final Exception e) {
 	    e.printStackTrace();

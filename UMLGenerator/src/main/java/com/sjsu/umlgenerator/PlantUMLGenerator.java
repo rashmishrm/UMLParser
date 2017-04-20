@@ -33,7 +33,7 @@ public class PlantUMLGenerator implements IUMLGenerator {
 	ConsoleLogger.printLog("Intermediate Text:" + intermediateText);
 	OutputStream png;
 	try {
-	    png = new FileOutputStream(intermediateText + ".png");
+	    png = new FileOutputStream(fileName + ".png");
 	    final SourceStringReader reader = new SourceStringReader(intermediateText);
 	    reader.generateImage(png);
 	} catch (final Exception e) {
