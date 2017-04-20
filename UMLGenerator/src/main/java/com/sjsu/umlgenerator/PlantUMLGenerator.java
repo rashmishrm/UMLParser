@@ -29,9 +29,19 @@ public class PlantUMLGenerator implements IUMLGenerator {
     }
 
     @Override
-    public String generateSequenceDiagram() {
-	// TODO Auto-generated method stub
-	return null;
+    public String generateSequenceDiagram(String intermediateText, String fileName) {
+	ConsoleLogger.printLog("Intermediate Text:" + intermediateText);
+	OutputStream png;
+	try {
+	    png = new FileOutputStream(intermediateText + ".png");
+	    final SourceStringReader reader = new SourceStringReader(intermediateText);
+	    reader.generateImage(png);
+	} catch (final Exception e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+
+	return fileName + ".png";
     }
 
     @Override

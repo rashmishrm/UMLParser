@@ -42,7 +42,7 @@ private String deactivate;
         System.out.println(signature);
          if(methodName.contains("."))
          currentClassName=methodName.split("\\.")[0];
-        System.out.println(currentClassName);
+       // System.out.println(currentClassName);
 
         }
         String sender=null;
@@ -78,11 +78,11 @@ private String deactivate;
       String methodCall=methodName+":"+returnType;
 
 //System.out.println(callDepth+"::::"+prefix+":::: "+sender+"------>" + methodCall+"---->"+currentClassName);
-System.out.println(sender+"->"+currentClassName+":"+methodCall);
+System.out.println("ASPECJ_TRACE: "+sender+"->"+currentClassName+":"+methodCall);
 
 if(currentClassName !=null && !currentClassName.equals(activate)){
 
-                System.out.println("activate "+currentClassName);
+               // System.out.println("activate "+currentClassName);
                 activate=currentClassName;
 
 }
@@ -106,7 +106,7 @@ if(currentClass !=null){
 if(currentClass.equals(activate)){
 activate=null;
 }
-                System.out.println("deactivate "+currentClass);
+              //  System.out.println("deactivate "+currentClass);
                 deactivate=currentClass;
 
 
