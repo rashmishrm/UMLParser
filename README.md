@@ -55,3 +55,6 @@ a) Build Docker Image
 ```
       docker run umlparser test-case-folder image_name.jpg
 ```
+
+## Latest Release
+https://github.com/rashmishrm/cmpe202-UMLParser/tree/2.0
