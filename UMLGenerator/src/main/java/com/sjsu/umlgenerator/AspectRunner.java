@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 
-public class Runner {
+public class AspectRunner {
 
     private String executeCommand(String command) {
 
@@ -54,7 +54,7 @@ public class Runner {
     }
 
     public static void main(String[] args) {
-	final Runner runner = new Runner();
+	final AspectRunner runner = new AspectRunner();
 	final String folder = "/Users/rashmisharma/Documents/Spring_2017/cmpe202/personal-project/umlparser/uml-sequence-test";
 
 	System.out.println(runner.run(folder));

@@ -74,7 +74,7 @@ public class UMLParser {
     }
 
     public String generateSequenceDiagram(String projectDir, String outputFileName) {
-	final Runner runner = new Runner();
+	final AspectRunner runner = new AspectRunner();
 
 	final String output = runner.run(projectDir);
 	final String fileName = generator.generateSequenceDiagram(output, outputFileName);
