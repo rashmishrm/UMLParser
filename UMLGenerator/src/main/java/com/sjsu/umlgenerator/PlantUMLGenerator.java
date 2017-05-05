@@ -5,7 +5,6 @@ import java.io.OutputStream;
 
 import com.sjsu.umlgenerator.parser.model.AppInfo;
 import com.sjsu.umlgenerator.parser.model.ClassInfo;
-import com.sjsu.umlgenerator.util.logger.ConsoleLogger;
 
 import net.sourceforge.plantuml.SourceStringReader;
 
@@ -14,7 +13,7 @@ public class PlantUMLGenerator implements IUMLGenerator {
     @Override
     public String generateClassDiagram(AppInfo appInfo, String fileName) {
 	final String intermediateText = buildPlantUmlIntermediateText(appInfo);
-	ConsoleLogger.printLog("Intermediate Text:" + intermediateText);
+	// ConsoleLogger.printLog("Intermediate Text:" + intermediateText);
 	OutputStream png;
 	try {
 	    png = new FileOutputStream(fileName + ".png");
@@ -30,7 +29,7 @@ public class PlantUMLGenerator implements IUMLGenerator {
 
     @Override
     public String generateSequenceDiagram(String intermediateText, String fileName) {
-	ConsoleLogger.printLog("Intermediate Text:" + intermediateText);
+	// ConsoleLogger.printLog("Intermediate Text:" + intermediateText);
 	OutputStream png;
 	try {
 	    png = new FileOutputStream(fileName + ".png");
@@ -65,11 +64,11 @@ public class PlantUMLGenerator implements IUMLGenerator {
 	{
 	    if (v.isCollection()) {
 
-		buffer.append(getScopePlantUml(v.getScope()) + " ")
+		buffer.append(" " + getScopePlantUml(v.getScope()) + " ")
 		.append(v.getName())
 		.append(" : ").append(v.getType() + "[" + v.getCollectionLabel() + "]").append("\n");
 	    } else {
-		buffer.append(getScopePlantUml(v.getScope()) + " ").append(v.getName())
+		buffer.append(" " + getScopePlantUml(v.getScope()) + " ").append(v.getName())
 		.append(" : ").append(v.getType()).append("\n");
 
 	    }
@@ -92,12 +91,12 @@ public class PlantUMLGenerator implements IUMLGenerator {
 		    }
 		    final String plantUMLScope = getScopePlantUml(v.getScope());
 		    if (v.isConstructor()) {
-			buffer.append(plantUMLScope).append(v.getName())
-			.append("(" + argument + ") : ").append(" ").append(" ").append("\n");
+			buffer.append(" " + plantUMLScope + " ").append(v.getName())
+			.append("(" + argument + ") ").append(" ").append(" ").append("\n");
 
 		    } else {
 			final String isstatic = v.isStatic() ? "{static}" : "";
-			buffer.append(isstatic + " " + plantUMLScope).append(v.getName())
+			buffer.append(isstatic + " " + plantUMLScope + " ").append(v.getName())
 			.append("(" + argument + ") : ").append(v.getReturnType()).append(" ").append("\n");
 		    }
 		}

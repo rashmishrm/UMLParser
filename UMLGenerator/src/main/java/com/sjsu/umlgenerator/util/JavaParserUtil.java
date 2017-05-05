@@ -18,16 +18,15 @@ public class JavaParserUtil {
 	final List<String> parametersList = new ArrayList<String>();
 
 	for (final Parameter param : parameters) {
-
 	    if (!Constants.INTERFACE.equals(classInfo.getType())
 		    && appInfo.getInterfaces().contains(param.getType().toString())) {
+
 		final RelationshipInfo info = new RelationshipInfo("uses", classInfo.getName(),
 			param.getType().toString(), "", "", "");
 		appInfo.getRelationsList().add(info);
 	    }
 
 	    parametersList.add(param.getNameAsString() + ":" + param.getType().toString());
-	    System.out.println(parameters);
 	}
 
 	return parametersList;

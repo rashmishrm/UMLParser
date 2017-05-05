@@ -47,10 +47,19 @@ public class MethodVisitor extends VoidVisitorAdapter<Object> {
 			    appInfo.getInterfaces().stream().forEach(a -> {
 
 				if (v.toString().contains(a)) {
-
-				    final RelationshipInfo info = new RelationshipInfo("uses", classInfo.getName(), a,
-					    "", "", "");
-				    appInfo.getRelationsList().add(info);
+				    final int index = v.toString().indexOf(a);
+				    boolean valid = true;
+				    if (index != 0) {
+					final String before = v.toString().substring(index - 1, index);
+					if ("\"".equals(before)) {
+					    valid = false;
+					}
+				    }
+				    if (valid) {
+					final RelationshipInfo info = new RelationshipInfo("uses", classInfo.getName(), a,
+						"", "", "");
+					appInfo.getRelationsList().add(info);
+				    }
 				}
 			    });
 

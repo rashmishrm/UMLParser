@@ -36,6 +36,22 @@ public class PackageJavaParser implements IPackageParser {
 
 	    appInfo.setDirectory(directory.getName());
 
+	    // traversing classes first
+	    new DirectoryIterator((level, path, file) -> path.endsWith(".java"), (level, path, file) -> {
+		try {
+		    final CompilationUnit cu = JavaParser.parse(file);
+		    final ClassInfo cInfo = new ClassInfo();
+		    new ClassVisitor(appInfo).visit(cu, cInfo);
+
+		    appInfo.getClassInfoList().add(cInfo);
+
+
+		} catch (final IOException e) {
+		    new RuntimeException(e);
+		}
+	    }).explore(directory);
+
+
 	    new DirectoryIterator((level, path, file) -> path.endsWith(".java"), (level, path, file) -> {
 		try {
 		    final CompilationUnit cu = JavaParser.parse(file);
@@ -44,10 +60,12 @@ public class PackageJavaParser implements IPackageParser {
 		    appInfo.getClassInfoList().add(cInfo);
 
 		    new ClassVisitor(appInfo).visit(cu, cInfo);
+		    new ConstructorVisitor(appInfo).visit(cu, cInfo);
 		    new MethodVisitor(appInfo).visit(cu, cInfo);
 
 		    new VariableVisitor(appInfo).visit(cu, cInfo);
-		    new ConstructorVisitor(appInfo).visit(cu, cInfo);
+
+
 
 		} catch (final IOException e) {
 		    new RuntimeException(e);

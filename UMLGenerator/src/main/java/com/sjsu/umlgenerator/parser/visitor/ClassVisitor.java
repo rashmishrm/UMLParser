@@ -37,7 +37,6 @@ public class ClassVisitor extends VoidVisitorAdapter<Object> {
 
 		classInfo.getRelationshipInfos().add(rInfo);
 		appInfo.getRelationsList().add(rInfo);
-		System.out.println("Ancestor" + x.getNameAsString());
 	    }
 
 	    for (final ClassOrInterfaceType x : c.getImplementedTypes()) {
@@ -46,7 +45,6 @@ public class ClassVisitor extends VoidVisitorAdapter<Object> {
 		classInfo.getRelationshipInfos().add(rInfo);
 		appInfo.getRelationsList().add(rInfo);
 
-		System.out.println("Ancestor Interface" + x.getNameAsString());
 	    }
 	}
 	super.visit(c, arg);

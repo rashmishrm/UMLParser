@@ -71,7 +71,11 @@ public class UMLParser {
 	String fileName = null;
 	final AppInfo appInfo = javaParser.buildAppInfo(projectDir);
 	if (null != appInfo) {
+	    ConsoleLogger.printLog("creating diagram using plant uml...");
+
 	    fileName = generator.generateClassDiagram(appInfo, outputFileName);
+	    ConsoleLogger.printLog("Done! Check File " + fileName);
+
 	}
 
 	return fileName;
@@ -81,7 +85,10 @@ public class UMLParser {
 	final AspectRunner runner = new AspectRunner();
 
 	final String output = runner.run(projectDir);
+	ConsoleLogger.printLog("creating diagram using plant uml...");
+
 	final String fileName = generator.generateSequenceDiagram(output, outputFileName);
+	ConsoleLogger.printLog("Done! Check File " + outputFileName);
 
 	return fileName;
     }
