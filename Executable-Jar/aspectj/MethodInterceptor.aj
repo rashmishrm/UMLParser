@@ -2,7 +2,7 @@ import java.util.*;
 
 public aspect MethodInterceptor {
       Stack<String> st = new Stack<String>();
-	pointcut traced() : !within(MethodInterceptor) && execution( * *.*(..));
+	pointcut traced() : !within(MethodInterceptor) && !cflow(initialization(*.new())) && execution( * *.*(..));
 
 
 
@@ -11,6 +11,7 @@ public aspect MethodInterceptor {
 	private int callDepth=1;
 	private String activate;
 	private String deactivate;
+
 
 
 
@@ -83,7 +84,7 @@ public aspect MethodInterceptor {
 
 
 	after() : traced() {
-	
+
 	callDepth--;
     if(currentClass !=null){
     if(currentClass.equals(activate)){
