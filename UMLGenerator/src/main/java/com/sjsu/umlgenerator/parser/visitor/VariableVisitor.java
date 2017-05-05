@@ -23,7 +23,6 @@ public class VariableVisitor extends VoidVisitorAdapter<Object> {
 
     @Override
     public void visit(FieldDeclaration n, Object arg) {
-	System.out.println(n);
 	// System.out.println(n.getVariables());
 
 	final Node childNode = n.getVariable(0);
@@ -58,7 +57,6 @@ public class VariableVisitor extends VoidVisitorAdapter<Object> {
 		    if (Class.forName("java.util." + type).isAssignableFrom(Collection.class)) {
 			isCollection = true;
 			type = genericType;
-			System.out.println(isCollection);
 		    } else if (type.contains("[")) {
 			isCollection = true;
 

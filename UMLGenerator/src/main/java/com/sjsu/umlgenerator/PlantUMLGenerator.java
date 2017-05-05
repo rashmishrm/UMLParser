@@ -65,10 +65,11 @@ public class PlantUMLGenerator implements IUMLGenerator {
 	{
 	    if (v.isCollection()) {
 
-		buffer.append(getScopePlantUml(v.getScope()) + " " + getScopePlantUml(v.getScope())).append(v.getName())
+		buffer.append(getScopePlantUml(v.getScope()) + " ")
+		.append(v.getName())
 		.append(" : ").append(v.getType() + "[" + v.getCollectionLabel() + "]").append("\n");
 	    } else {
-		buffer.append(getScopePlantUml(v.getScope()) + " " + getScopePlantUml(v.getScope())).append(v.getName())
+		buffer.append(getScopePlantUml(v.getScope()) + " ").append(v.getName())
 		.append(" : ").append(v.getType()).append("\n");
 
 	    }
@@ -85,20 +86,18 @@ public class PlantUMLGenerator implements IUMLGenerator {
 		    for (final String argu : v.getArguemnts()) {
 			argument += argu + ",";
 		    }
-		    System.out.println("first" + argument);
 
 		    if (argument.length() > 1) {
 			argument = argument.substring(0, argument.length() - 1);
 		    }
-		    System.out.println("secomd" + argument);
 		    final String plantUMLScope = getScopePlantUml(v.getScope());
 		    if (v.isConstructor()) {
-			buffer.append(plantUMLScope + " " + plantUMLScope).append(v.getName())
+			buffer.append(plantUMLScope).append(v.getName())
 			.append("(" + argument + ") : ").append(" ").append(" ").append("\n");
 
 		    } else {
 			final String isstatic = v.isStatic() ? "{static}" : "";
-			buffer.append(isstatic + " " + plantUMLScope + " " + plantUMLScope).append(v.getName())
+			buffer.append(isstatic + " " + plantUMLScope).append(v.getName())
 			.append("(" + argument + ") : ").append(v.getReturnType()).append(" ").append("\n");
 		    }
 		}

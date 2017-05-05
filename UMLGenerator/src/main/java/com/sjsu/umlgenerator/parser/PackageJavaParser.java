@@ -10,7 +10,7 @@ import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.sjsu.umlgenerator.parser.model.AppInfo;
 import com.sjsu.umlgenerator.parser.model.ClassInfo;
-import com.sjsu.umlgenerator.parser.model.DirExplorer;
+import com.sjsu.umlgenerator.parser.model.DirectoryIterator;
 import com.sjsu.umlgenerator.parser.visitor.ClassVisitor;
 import com.sjsu.umlgenerator.parser.visitor.ConstructorVisitor;
 import com.sjsu.umlgenerator.parser.visitor.MethodVisitor;
@@ -36,7 +36,7 @@ public class PackageJavaParser implements IPackageParser {
 
 	    appInfo.setDirectory(directory.getName());
 
-	    new DirExplorer((level, path, file) -> path.endsWith(".java"), (level, path, file) -> {
+	    new DirectoryIterator((level, path, file) -> path.endsWith(".java"), (level, path, file) -> {
 		try {
 		    final CompilationUnit cu = JavaParser.parse(file);
 		    final ClassInfo cInfo = new ClassInfo();

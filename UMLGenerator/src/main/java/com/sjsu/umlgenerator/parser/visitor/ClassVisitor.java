@@ -22,9 +22,6 @@ public class ClassVisitor extends VoidVisitorAdapter<Object> {
 	 * called for all methods in this CompilationUnit, including inner class
 	 * methods
 	 */
-	System.out.println(c.getName());
-	System.out.println(c.getExtendedTypes().size());
-
 	if (arg instanceof ClassInfo) {
 	    final ClassInfo classInfo = (ClassInfo) arg;
 	    classInfo.setName(c.getNameAsString());

@@ -12,8 +12,6 @@ public aspect MethodInterceptor {
 	private String activate;
 	private String deactivate;
 
-	pointcut allConstructorCalls() :  !within(Main) && execution(*.new(..));
-
 
 
 

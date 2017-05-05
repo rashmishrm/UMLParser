@@ -2,14 +2,14 @@ package com.sjsu.umlgenerator.parser.model;
 
 import com.github.javaparser.ast.Node;
 
-public class NodeIterator {
+public class FileIterator {
     public interface NodeHandler {
 	boolean handle(Node node);
     }
 
     private final NodeHandler nodeHandler;
 
-    public NodeIterator(NodeHandler nodeHandler) {
+    public FileIterator(NodeHandler nodeHandler) {
 	this.nodeHandler = nodeHandler;
     }
 

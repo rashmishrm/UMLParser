@@ -42,11 +42,13 @@ public class UMLParser {
 		if (directory.exists()) {
 		    final UMLParser umlParser = new UMLParser();
 		    if ("1".equals(type)) {
+			ConsoleLogger.printLog("Genrating class diagram ");
+
 			umlParser.generateClassDiagram(inputFolder, outputFileName);
 
 		    } else if ("2".equals(type)) {
 			umlParser.generateSequenceDiagram(inputFolder, outputFileName);
-
+			ConsoleLogger.printLog("Genrating sequence diagram ");
 		    }
 		} else {
 		    ConsoleLogger.printLog("Please provide valid folder.  " + inputFolder);
@@ -59,7 +61,9 @@ public class UMLParser {
 
 	} catch (final ParseException e) {
 	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+	    // e.printStackTrace();
+	    ConsoleLogger.printLog("Unable to Parse");
+
 	}
     }
 
