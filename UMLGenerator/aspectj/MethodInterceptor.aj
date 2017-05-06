@@ -2,7 +2,7 @@ import java.util.*;
 
 public aspect MethodInterceptor {
       Stack<String> st = new Stack<String>();
-	pointcut traced() : !within(MethodInterceptor) && !cflow(initialization(*.new())) && execution( * *.*(..));
+	pointcut traced() : !within(MethodInterceptor) && !cflow(initialization(TheEconomy.new())) && execution( * *.*(..));
 
 
 
@@ -11,6 +11,9 @@ public aspect MethodInterceptor {
 	private int callDepth=1;
 	private String activate;
 	private String deactivate;
+
+
+
 
 
 	before() : traced(){
@@ -68,7 +71,8 @@ public aspect MethodInterceptor {
 
      	 String methodCall=methodName+":"+returnType;
 		System.out.println("ASPECJ_TRACE: "+sender+"->"+currentClassName+":"+methodCall);
-
+			System.out.println("ASPECJ_TRACE: activate "+currentClassName);
+	
 	if(currentClassName !=null && !currentClassName.equals(activate)){
                 activate=currentClassName;
 
@@ -86,8 +90,12 @@ public aspect MethodInterceptor {
     if(currentClass !=null){
     if(currentClass.equals(activate)){
     activate=null;
+    	System.out.println("ASPECJ_TRACE: deactivate "+currentClass);
+    
     }
 	}
+	
+	
 	if(st.size()>0)
       st.pop();
 	}
