@@ -10,7 +10,7 @@ if [[ $INPUT_FOLDER == *"sequence"* ]];
 then
 OPTION=2
 fi
-echo $OPTION
+
 # Compile the sources
 echo "Creating diagram"
 

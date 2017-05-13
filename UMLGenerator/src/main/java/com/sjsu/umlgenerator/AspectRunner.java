@@ -9,7 +9,6 @@ public class AspectRunner {
     private String executeCommand(String command) {
 
 	final StringBuffer output = new StringBuffer();
-	System.out.println(command);
 	Process p;
 	try {
 	    p = Runtime.getRuntime().exec(command);
@@ -17,7 +16,6 @@ public class AspectRunner {
 	    final BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
 	    output.append("@startuml" + "\n");
-	    output.append("autonumber \n");
 	    String line = "";
 	    while ((line = reader.readLine()) != null) {
 
