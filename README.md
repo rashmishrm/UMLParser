@@ -1,8 +1,4 @@
 
-[![Stories in In%20Progress](https://badge.waffle.io/rashmishrm/cmpe202-UMLParser.png?label=In%20Progress&title=In%20Progress)](https://waffle.io/rashmishrm/cmpe202-UMLParser)
-
-[![Stories in Ready](https://badge.waffle.io/rashmishrm/cmpe202-UMLParser.png?label=Ready&title=Ready)](https://waffle.io/rashmishrm/cmpe202-UMLParser)
-
 # UML Generator
 
 UML Generator takes source folder as input and generates class diagram as output
@@ -41,20 +37,3 @@ UML Generator takes source folder as input and generates class diagram as output
       2. sh umlparser.sh <input-folder> <outputfile_name>
    ```
    
- 
-  ## With Docker
-    
-a) Build Docker Image
-    
- ```
-      docker build -t umlparser:latest
-```
-    
- b) Run With Docker.
-    
-```
-      docker run umlparser test-case-folder image_name.jpg
-```
-
-## Latest Release
-https://github.com/rashmishrm/cmpe202-UMLParser/tree/2.0
