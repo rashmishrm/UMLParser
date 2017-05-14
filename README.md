@@ -36,4 +36,8 @@ UML Generator takes source folder as input and generates class diagram as output
       1. cd <PATH_TO_EXECUTABLE-JAR_FOLDER> 
       2. sh umlparser.sh <input-folder> <outputfile_name>
    ```
-   
+  
+  ## Libraries Used
+  1. JavaParser
+  2. PlantUml
+  
